@@ -11,18 +11,31 @@ class PruebasCovidUsuarios implements Crud{
     public static function getAll(){
         $mysqli = Database::getInstance(true);
         $query =<<<sql
-        SELECT pc.id_prueba_covid AS id_c_v, pc.utilerias_asistentes_id, pc.status AS status_prueba, pc.resultado, pc.tipo_prueba, fecha_carga_documento, tipo_prueba, pc.nota, resultado, email, telefono, documento,  CONCAT(ra.nombre, ' ',ra.segundo_nombre,' ',ra.apellido_paterno,' ',ra.apellido_materno) AS nombre_completo,
+        SELECT pc.id_prueba_covid AS id_c_v, pc.utilerias_asistentes_id, pc.status AS status_prueba, pc.resultado, pc.tipo_prueba,
+            numero_empleado, fecha_carga_documento, tipo_prueba, pc.nota, resultado, email, telefono, documento,  CONCAT(ra.nombre, ' ',ra.segundo_nombre,' ',ra.apellido_paterno,' ',ra.apellido_materno) AS nombre_completo, 
+            b.nombre AS nombre_bu, 
+            p.nombre as nombre_posicion,
             lp.nombre AS nombre_linea, 
+            le.nombre as nombre_linea_ejecutivo, 
+            le.color, al.utilerias_administradores_id_linea_asignada as id_ejecutivo_administrador, 
             uad.nombre as nombre_ejecutivo
         FROM prueba_covid pc
         JOIN utilerias_asistentes u
         JOIN registros_acceso ra
-        JOIN linea_principal lp        
+        JOIN bu b
+        JOIN linea_principal lp
+        JOIN posiciones p
+        JOIN linea_ejecutivo le
+        JOIN asigna_linea al
         JOIN utilerias_administradores uad    
         ON pc.utilerias_asistentes_id = u.utilerias_asistentes_id
         and u.id_registro_acceso = ra.id_registro_acceso
-        and lp.id_linea_principal = ra.especialidad
-        and uad.utilerias_administradores_id = lp.utilerias_administradores_id
+        and b.id_bu = ra.id_bu
+        and lp.id_linea_principal = ra.id_linea_principal
+        and p.id_posicion = ra.id_posicion
+        and le.id_linea_ejecutivo = lp.id_linea_ejecutivo
+        and al.id_linea_ejecutivo = le.id_linea_ejecutivo
+        and uad.utilerias_administradores_id = al.utilerias_administradores_id_linea_asignada;
 sql;
 
         return $mysqli->queryAll($query);
@@ -36,32 +49,8 @@ sql;
     public static function update($data){
         
     }
-    public static function updateStatus($id){
-        $mysqli = Database::getInstance(true);
-        $query=<<<sql
-        UPDATE prueba_covid SET status = 0 WHERE id_prueba_covid = $id
-sql;       
-        $log = new \stdClass();
-        $log->_sql= $query;
-        $log->_parametros = $id;
-        $log->_id = $id;
-        // UtileriasLog::addAccion($log);
-
-        return $mysqli->update($query);
-    }
     public static function delete($id){
-        $mysqli = Database::getInstance(true);
-        $query=<<<sql
-        DELETE FROM prueba_covid WHERE id_prueba_covid = $id 
-sql;
-
-        $log = new \stdClass();
-        $log->_sql= $query;
-        $log->_parametros = $id;
-        $log->_id = $id;
-        UtileriasLog::addAccion($log);
         
-        return $mysqli->delete($query);
     }
 
     public static function insertLog($ua_id,$fecha_doc,$fecha_prueba,$tipo_prueba,$doc,$nota){
@@ -94,12 +83,6 @@ sql;
         $accion->_descripcion = 'Un ejecutivo ha validado su '.$accion->_titulo. ' exitosamente';
         UtileriasNotificacionesLog::addAccion($accion);
 
-        $accion = new \stdClass();
-        $accion->_sql= $query;
-        $accion->_parametros = $parametros;
-        $accion->_id = $data->_id_prueba_covid;
-        UtileriasLog::addAccion($accion);
-
         return $mysqli->update($query,$parametros);
     }
 
@@ -123,12 +106,6 @@ sql;
         $accion->_descripcion = 'Un ejecutivo ha rechazado su '.$accion->_titulo;
         UtileriasNotificacionesLog::addAccion($accion);
 
-        $accion = new \stdClass();
-        $accion->_sql= $query;
-        $accion->_parametros = $parametros;
-        $accion->_id = $data->_id_prueba_covid;
-        UtileriasLog::addAccion($accion);
-
         return $mysqli->update($query,$parametros);
 
     }
@@ -149,7 +126,7 @@ sql;
         $accion->_sql= $query;
         $accion->_parametros = $parametros;
         $accion->_id = $data->_administrador_id;
-        UtileriasLog::addAccion($accion);
+        // UtileriasLog::addAccion($accion);
         return $mysqli->update($query, $parametros);
 
     }
@@ -338,17 +315,30 @@ sql;
     public static function getComprobateByIdUser($id_asis){
         $mysqli = Database::getInstance(true);
         $query =<<<sql
-        SELECT pc.id_prueba_covid AS id_c_v, pc.utilerias_asistentes_id, pc.status AS status_prueba, pc.resultado, pc.tipo_prueba, fecha_carga_documento, tipo_prueba, pc.nota, resultado, email, telefono, documento,  CONCAT(ra.nombre, ' ',ra.segundo_nombre,' ',ra.apellido_paterno,' ',ra.apellido_materno) AS nombre_completo,
-            lp.nombre AS nombre_linea, 
-            uad.nombre as nombre_ejecutivo
+        SELECT pc.id_prueba_covid AS id_pc, pc.utilerias_asistentes_id, pc.nota, pc.status AS status_prueba,
+            email, telefono, fecha_carga_documento, numero_empleado, fecha_carga_documento, pc.tipo_prueba, pc.resultado, pc.fecha_prueba_covid, documento,
+            b.nombre AS nombre_bu, 
+            p.nombre as nombre_posicion,
+            lp.nombre AS nombre_linea,  
+            CONCAT(ra.nombre, ' ',ra.segundo_nombre,' ',ra.apellido_paterno,' ',ra.apellido_materno) AS nombre_completo,
+            le.nombre as nombre_linea_ejecutivo, le.color, al.utilerias_administradores_id_linea_asignada as id_ejecutivo_administrador, uad.nombre as nombre_ejecutivo
         FROM prueba_covid pc
         JOIN utilerias_asistentes u
         JOIN registros_acceso ra
-        JOIN linea_principal lp        
+        JOIN bu b
+        JOIN linea_principal lp
+        JOIN posiciones p
+        JOIN linea_ejecutivo le
+        JOIN asigna_linea al
         JOIN utilerias_administradores uad    
         ON pc.utilerias_asistentes_id = u.utilerias_asistentes_id
         and u.id_registro_acceso = ra.id_registro_acceso
-        and lp.id_linea_principal = ra.especialidad
+        and b.id_bu = ra.id_bu
+        and lp.id_linea_principal = ra.id_linea_principal
+        and p.id_posicion = ra.id_posicion
+        and le.id_linea_ejecutivo = lp.id_linea_ejecutivo
+        and al.id_linea_ejecutivo = le.id_linea_ejecutivo
+        and uad.utilerias_administradores_id = al.utilerias_administradores_id_linea_asignada
         where ra.clave = '$id_asis';
 sql;
 

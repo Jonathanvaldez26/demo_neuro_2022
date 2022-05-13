@@ -10,7 +10,7 @@
   --bs-blue: #63B3ED;
   --bs-indigo: #596CFF;
   --bs-purple: #6f42c1;
-  --bs-pink: rgb(255, 198, 227);
+  --bs-pink: #d63384;
   --bs-red: #F56565;
   --bs-orange: #fd7e14;
   --bs-yellow: #FBD38D;
@@ -10368,36 +10368,8 @@ fieldset:disabled .btn {
   background-image: var(--bs-gradient) !important;
 }
 
-.bg-gradient-musa {
-  background-image: linear-gradient(0deg, yellow, orange 75%);
-}
-
-.bg-gradient-pink-white {
-  background-image: linear-gradient(0deg, pink, #f7e1ebcc 75%);
-}
-
-.bg-gradient-pink {
-  background-image: linear-gradient(0deg, pink, #f7e1ebcc 75%);
-}
-
 .bg-gradient-red {
   background-image: linear-gradient(310deg, #ff0032 0%, #b10303 100%);
-}
-
-.morado-musa-text{
-  color: rgb(98 56 246);
-}
-
-.bg-musa-morado{
-  background-color: rgb(98 56 246);
-}
-
-.bg-pink{
-  background-color: pink;
-}
-
-.bg-turquoise{
-  background-color: turquoise;
 }
 
 .user-select-all {
@@ -22884,8 +22856,7 @@ z-index: 9999;
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
-  /* background-image: linear-gradient(310deg, #ff0032 0%, #b10303 100%); */
-  background-image: linear-gradient(0deg, yellow, orange 75%);
+  background-image: linear-gradient(310deg, #ff0032 0%, #b10303 100%);
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon svg .color-background,
@@ -36972,25 +36943,3 @@ table.dataTable.no-footer {
   max-height: 25rem;
 }
 /*# sourceMappingURL=dashboard-pro.css.map */
-
-.max-btn{
-  width: 100%;
-  max-width: -webkit-fill-available;
-}
-
-.max-btn-lg{
-  width: 100%;
-  max-width: -webkit-fill-available;
-  font-size: x-large;
-}
-
-.text-move:hover{
-  transform: translateY(-5px);
-  text-shadow: 0px 0px 10px turquoise;
-  color: rgb(98 56 246) !important;
-  cursor: pointer;
-}
-
-.text-morado-musa{
-  color: rgb(98 56 246) ;
-}

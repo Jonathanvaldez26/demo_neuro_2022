@@ -5,10 +5,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="https://foromusa.com/assets/images/Musa0-01.png">
-    <link rel="icon" type="image/png" href="https://foromusa.com/assets/images/Musa0-01.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="/assets/img/angel.png">
     <title>
-        Asistencias - MUSA - GRUPO LAHE
+        Asistencia CONAVE Convención 2022 ASOFARMA
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -28,15 +28,15 @@
     <nav class="navbar navbar-expand-lg  blur blur-rounded top-0  z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
         <div class="container-fluid">
             <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 ">
-                <img src="../../../assets/img/favicon.png" style="width: 180px; height: 40px; margin-left: 5px; margin-right: 5px;">
-                Asistencia MUSA 2022
+                <img src="../../../img/logos/asistencias.jpeg" style="width: 40px; height: 40px; margin-left: 5px; margin-right: 5px;">
+                Asistencia CONAVE Convención 2022 ASOFARMA
             </a>
             <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
                 <ul class="navbar-nav navbar-nav-hover mx-auto">
                 </ul>
                 <ul class="navbar-nav d-lg-block d-none">
                     <li class="nav-item">
-                        <a href="/Principal/" class="btn btn-sm  bg-gradient-pink  btn-round mb-0 me-1" onclick="smoothToPricing('pricing-soft-ui')">INICIO</a>
+                        <a href="/Login/" class="btn btn-sm  bg-gradient-info  btn-round mb-0 me-1" onclick="smoothToPricing('pricing-soft-ui')">INICIAR SESIÓN</a>
                     </li>
                 </ul>
             </div>
@@ -62,10 +62,10 @@
                                                             <div class="container">
                                                                 <div class="row mt-lg-0 mt-1">
                                                                     <div class="col-lg-5 my-auto">
-                                                                        <h1 class=" text-bolder text-gradient text-info fadeIn1 fadeInBottom ">Error</h1>
+                                                                        <h1 class=" text-bolder text-gradient text-danger fadeIn1 fadeInBottom ">Error</h1>
                                                                         <h4 class="fadeIn3 fadeInBottom opacity-8">Su Código de Asistencias NO es Válido. </h4>
                                                                         <p class="lead opacity-6 fadeIn2 fadeInBottom">Verifique su link de acceso.</p>
-                                                                        <a href="/Login/" type="button" class="btn bg-gradient-pink mt-4 fadeIn2 fadeInBottom">Ir a la página de inicio</a>
+                                                                        <a href="/Login/" type="button" class="btn bg-gradient-danger mt-4 fadeIn2 fadeInBottom">Ir a la página de inicio</a>
                                                                     </div>
                                                                     <div class="col-lg-7 my-auto">
                                                                         <img class="w-100 fadeIn1 fadeInBottom" src="../../../assets/img/illustrations/error-500.png" alt="500-error">

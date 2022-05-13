@@ -1,12 +1,192 @@
 <?php echo $header; ?>
-<title>
-    Asistentes Detalles - <?php echo $detalles_registro['nombre'] . ' ';
-                                                                                                        echo $detalles_registro['segundo_nombre'] . ' ';
-                                                                                                        echo $detalles_registro['apellido_paterno'] . ' ';
-                                                                                                        echo $detalles_registro['apellido_materno']; ?> - MUSA - GRUPO LAHE
-</title>
+
 <body class="g-sidenav-show  bg-gray-100">
-    <?php echo $asideMenu;?>
+    <aside class="bg-white-aside sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+        <div class="sidenav-header" style="margin-bottom: 30px;">
+            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+
+            <a class="navbar-brand m-0" href="/Principal/" target="_blank">
+                <img src="/assets/img/favicon.png" class="navbar-brand-img h-100" alt="main_logo">
+                <span class="ms-1 font-weight-bold">ADMIN CONVENCIÓN</span>
+                <p style="margin-top: 15px;"><?php echo $_SESSION['nombre']; ?></p>
+            </a>
+
+
+        </div>
+        <hr class="horizontal dark mt-0">
+
+
+        <div class="collapse navbar-collapse  w-auto h-auto h-100" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="/Principal/" role="button" class="nav-link" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-home" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Principal</span>
+                    </a>
+
+                </li>
+
+                <li class="nav-item" <?= $permisoGlobalHidden; ?>>
+                    <a data-bs-toggle="collapse" onclick="catalogos()" href="#catalogos" class="nav-link " aria-controls="catalogos" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-sitemap" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Catálogos</span>
+                    </a>
+                    <div class="collapse " id="catalogos" hidden>
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Bu/">
+                                    <span class="sidenav-mini-icon"> B </span>
+                                    <span class="sidenav-normal">Bu Asofarma</span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Lineas/">
+                                    <span class="sidenav-mini-icon"> L </span>
+                                    <span class="sidenav-normal">Lineas Asofarma</span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Posiciones/">
+                                    <span class="sidenav-mini-icon"> P </span>
+                                    <span class="sidenav-normal"> Posiciones Asofarma </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Restaurantes/">
+                                    <span class="sidenav-mini-icon"> R </span>
+                                    <span class="sidenav-normal"> Restaurates </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <hr class="horizontal dark" />
+                            </li>
+                            <!-- <li class="nav-item ">
+                                <a class="nav-link " href="/Restaurantes/">
+                                    <span class="sidenav-mini-icon"> E </span>
+                                    <span class="sidenav-normal"> Restaurates </span>
+                                </a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item" <?= $asistentesHidden; ?>>
+                    <a href="/Asistentes/" class="nav-link active" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-users" style="color: white"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Asistentes</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $vuelosHidden; ?>>
+                    <a href="/Vuelos/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-plane" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Vuelos</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $pickUpHidden; ?>>
+                    <a href="/PickUp/" class="nav-link " aria-controls="ecommerceExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-bus" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">PickUp</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $habitacionesHidden; ?>>
+                    <a href="/Habitaciones/" class="nav-link " aria-controls="authExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-shield-virus" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Habitaciones</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $cenasHidden; ?>>
+                    <a href="/Cenas/" class="nav-link " aria-controls="authExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-coffee" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Cenas</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $vacunacionHidden; ?>>
+                    <hr class="horizontal dark" />
+                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">SALUD</h6>
+                </li>
+                <li class="nav-item" <?= $vacunacionHidden; ?>>
+                    <a href="/ComprobantesVacunacion/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-shield-virus" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Comprobante Vacunación</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $pruebasHidden; ?>>
+                    <a href="/PruebasCovidUsuarios/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-virus-slash" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Pruebas Covid Usuarios</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $aistenciasHidden; ?>>
+                    <a href="/Asistencias/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-bell" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Asistencias</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $configuracionHidden; ?>>
+                    <hr class="horizontal dark" />
+                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OTROS</h6>
+                </li>
+                <li class="nav-item" <?= $configuracionHidden; ?>>
+                    <a href="/Configuracion/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-tools" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Configuración</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $utileriasHidden; ?>>
+                    <a data-bs-toggle="collapse" onclick="utilerias()" href="#utilerias" class="nav-link " aria-controls="utilerias" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-user-circle-o" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Utilerias</span>
+                    </a>
+                    <div class="collapse " id="utilerias" hidden>
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Administradores/">
+                                    <span class="sidenav-mini-icon"> A </span>
+                                    <span class="sidenav-normal">Administradores</span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Perfiles/">
+                                    <span class="sidenav-mini-icon"> P </span>
+                                    <span class="sidenav-normal"> Perfiles </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Log/">
+                                    <span class="sidenav-mini-icon"> L </span>
+                                    <span class="sidenav-normal"> Log </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 px-0 mx-4 shadow-none border-radius-xl z-index-sticky" id="navbarBlur" data-scroll="true">
@@ -176,8 +356,8 @@
                             </div>
                         </div>
                         <div class="card-body p-3 pt-0">
-                            <div class="row d-flex justify-content-center">
-                                <!-- <div class="col-lg-3 col-md-3 col-12">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-12">
                                     <h6 class="mb-3">Log</h6>
                                     <div class="timeline timeline-one-side scroll-log">
                                         <div class="timeline-block mb-4">
@@ -229,7 +409,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
                                 <div class="col-md-9 col-12">
                                     <hr class="horizontal dark mt-0 mb-4">
                                     <div class="row">
@@ -335,9 +515,7 @@
                                                                 <input id="apellidos-canvas" type="text" value="<?php echo $apellidos; ?>" hidden readonly>
                                                                 <div class="col-md-12 col-12 text-center">
                                                                     <div id="main_ticket" hidden>
-                                                                        <canvas id="canvas_ticket" width="1220" height="457" name="ticket-<?php echo $clave_user; ?>" alt="ticket-<?php echo $clave_user; ?>" style="background: white; width: -webkit-fill-available;">
-                                                                            <img src="/img/boleto_musa.jpg" alt="">
-                                                                        </canvas> <!--  background-image: url('/img/ticket.jpg'); -->
+                                                                        <canvas id="canvas_ticket" width="1220" height="457" name="ticket-<?php echo $clave_user; ?>" alt="ticket-<?php echo $clave_user; ?>" style="background: white; width: -webkit-fill-available;"></canvas> <!--  background-image: url('/img/ticket.jpg'); -->
                                                                     </div>
                                                                 </div>
 
@@ -449,38 +627,32 @@
                                                             <h3><?php echo $msg_clave; ?></h3>
                                                             <div class="row">
                                                                 <a href='' target='_blank' style='display:none;' id='a_abrir_etiqueta'>abrir</a>
-                                                                
-                                                                <div class="col-12 col-md-6">
+                                                                <div class="col-md-3">
+                                                                    <?php echo $btn_gafete; ?>
+                                                                </div>
+
+                                                                <form action="" id="form_etiquetas">
                                                                     <div class="row">
-                                                                        <div class="col-12 col-md-10">
-                                                                            <h4>Gafete</h4>
-                                                                            <?php echo $btn_gafete; ?>
+                                                                        <input type="hidden" id="clave_ra" name="clave_ra" value="<?php echo $clave_ra; ?>">
+
+                                                                        <div class="col-md-3">
+                                                                            <label>Número de Habitación</label>
+                                                                            <input type="number" id="no_habitacion" name="no_habitacion" class="form-control" />
+                                                                        </div>
+
+                                                                        <div class="col-md-3">
+                                                                            <label>Número de etiquetas</label>
+                                                                            <input type="number" id="no_etiquetas" name="no_etiquetas" class="form-control" />
+                                                                        </div>
+
+                                                                        <div class="col-md-3">
+                                                                            <button id="btn_imprimir_etiquetas" class="btn btn-info mt-4" type="submit">Imprimir Etiquetas</button>
                                                                         </div>
                                                                     </div>
-                                                                </div>
 
-                                                                <div class="col-12 col-md-6">
-                                                                    <form action="" id="form_etiquetas">
-                                                                        <div class="row">
-                                                                            <input type="hidden" id="clave_ra" name="clave_ra" value="<?php echo $clave_ra; ?>">
-                                                                            <h4>Etiquetas</h4>
-                                                                            <div class="col-md-6">
-                                                                                <label>Número de Habitación</label>
-                                                                                <input type="number" id="no_habitacion" name="no_habitacion" class="form-control" />
-                                                                            </div>
+                                                                </form>
 
-                                                                            <div class="col-md-6">
-                                                                                <label>Número de etiquetas</label>
-                                                                                <input type="number" id="no_etiquetas" name="no_etiquetas" class="form-control" />
-                                                                            </div>
 
-                                                                            <div class="col-md-4 m-auto">
-                                                                                <button id="btn_imprimir_etiquetas" class="btn btn-info mt-4" type="submit">Imprimir Etiquetas</button>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </form>
-                                                                </div>
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -576,6 +748,10 @@
 
                                     <?php echo $res_alimenticias; ?>
 
+                                    <?php echo $alergia_medicamento_cual; ?>
+
+                                    <!-- <?php echo $alergias_a; ?> -->
+
                                     <!-- <div class="col-md-4">
                                         <label class="form-label mt-4">Alergias *</label>
                                         <input class="form-control" name="alergias" id="alergias" maxlength="149" name="alergias" data-color="dark" type="text" value="<?= $detalles_registro['alergias'] ?>" placeholder="" />
@@ -616,9 +792,6 @@
         // document.getElementById('main_ticket').removeAttribute('hidden');
         // app.loadPicture();
 
-        $('#asistentes a').addClass('active');
-        $('#asistentes .fa-users').addClass('text-white');
-
         $("#form_etiquetas").on("submit", function(event) {
             event.preventDefault();
             var formData = new FormData(document.getElementById("form_etiquetas"));
@@ -631,6 +804,8 @@
             console.log(clave_ra);
             console.log(no_etiquetas);
 
+
+
             $("#a_abrir_etiqueta").attr("href", "/Asistentes/abrirpdf/" + clave_ra + "/" + no_etiquetas + "/" + no_habitacion);
             $("#a_abrir_etiqueta")[0].click();
 
@@ -641,7 +816,7 @@
             context = canvas.getContext('2d');
 
             var imgTicketFondo = new Image();
-            imgTicketFondo.src = '/img/boleto_musa.jpg';
+            imgTicketFondo.src = '/img/boleto.png';
 
             imgTicketFondo.onload = function() {
                 context.drawImage(imgTicketFondo, 0, 0);
@@ -654,12 +829,12 @@
 
             public.loadPicture = function() {
 
-                // var imgTicketFondo = new Image();
-                // imgTicketFondo.src = '/img/boleto_musa.jpg';
+                var imgTicketFondo = new Image();
+                imgTicketFondo.src = '/img/boleto.png';
 
-                // imgTicketFondo.onload = function() {
-                //     context.drawImage(imgTicketFondo, 0, 0);
-                // }
+                imgTicketFondo.onload = function() {
+                    context.drawImage(imgTicketFondo, 0, 0);
+                }
 
                 context = canvas.getContext('2d');
 
@@ -669,22 +844,22 @@
                 imgCodeQr.onload = function() {
                     context.drawImage(imgTicketFondo, 0, 0);
                     context.drawImage(imgCodeQr, 870, 90);
-                
 
-                    var centerX = canvas.width/2;
-                    var centerY = canvas.height/2;
+
+                    var centerX = canvas.width / 2;
+                    var centerY = canvas.height / 2;
 
                     context = canvas.getContext('2d');
 
-                    context.font="20pt Verdana";
-                    context.fillStyle = "black";
+                    context.font = "20pt Verdana";
+                    context.fillStyle = "white";
 
-                    context.fillText($('#nombre-canvas').val(),280, centerY+80);
+                    context.fillText($('#nombre-canvas').val(), 430, centerY - 50);
 
-                    context.font="20pt Verdana";
-                    context.fillStyle = "black";
+                    context.font = "20pt Verdana";
+                    context.fillStyle = "white";
 
-                    context.fillText($('#apellidos-canvas').val(),280, centerY+110);
+                    context.fillText($('#apellidos-canvas').val(), 430, centerY);
                 }
 
             };
@@ -692,15 +867,12 @@
             return public;
         }());
 
-        document.getElementById('main_ticket').removeAttribute('hidden');
-        app.loadPicture();
-
-        // $('#show_ticket').on('click', function(event) {
-        //     // alert('Mostrar Ticket');
-        //     // console.log('asdasdasdas');
-        //     document.getElementById('main_ticket').removeAttribute('hidden');
-        //     app.loadPicture();
-        // })
+        $('#show_ticket').on('click', function(event) {
+            // alert('Mostrar Ticket');
+            // console.log('asdasdasdas');
+            document.getElementById('main_ticket').removeAttribute('hidden');
+            app.loadPicture();
+        })
 
         $('#generar_clave').on('click', function(event) {
 
@@ -784,24 +956,14 @@
                 },
                 success: function(respuesta) {
                     // alert("Successs");
-                    console.log(respuesta)
+
                     if (respuesta == 'success') {
-                        Swal.fire({
-                            title: "!Se actualizaron tus datos correctamente!",
-                            html: '',
-                            icon:"success",
-                            timer: 1250,
-                        }).
+                        swal("!Se actualizaron tus datos correctamente!", "", "success").
                         then((value) => {
                             window.location.reload();
                         });
                     } else {
-                        Swal.fire({
-                            title: '!Usted No Actualizó Nada!',
-                            html: '',
-                            icon: 'warning',
-                            timer: 1000,
-                        }).
+                        swal("!Usted No Actualizó Nada!", "", "warning").
                         then((value) => {
                             //window.location.replace("/Asistentes")
                         });
@@ -813,6 +975,54 @@
 
             });
         });
+
+
+
+        // $("#generar_clave").on("click", function(event) {
+        //     // event.preventDefault();
+
+        //     alert("Hola");
+
+        // var formData = new FormData(document.getElementById("generar_clave"));
+        // for (var value of formData.values()) {
+        //     console.log(value);
+        // }
+
+        // console.log(formData);
+
+        // $.ajax({
+        //     url: "/Asistentes/Actualizar",
+        //     type: "POST",
+        //     data: formData,
+        //     cache: false,
+        //     contentType: false,
+        //     processData: false,
+        //     beforeSend: function() {
+        //         console.log("Procesando....");
+
+
+        //     },
+        //     success: function(respuesta) {
+        //         // alert("Successs");
+
+        //         if (respuesta == 'success') {
+        //             swal("!Se actualizaron tus datos correctamente!", "", "success").
+        //             then((value) => {
+        //                 window.location.reload();
+        //             });
+        //         } else {
+        //             swal("!Usted No Actualizó Nada!", "", "warning").
+        //             then((value) => {
+        //                 //window.location.replace("/Asistentes")
+        //             });
+        //         }
+        //     },
+        //     error: function(respuesta) {
+        //         console.log(respuesta);
+        //     }
+
+        // });
+        // });
 
 
         $('input:radio[name="confirm_alergia"]').change(function() {

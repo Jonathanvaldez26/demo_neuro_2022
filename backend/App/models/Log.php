@@ -8,11 +8,6 @@ use \App\controllers\UtileriasLog;
 
 class Log implements Crud{
     public static function getAll(){
-        $mysqli = Database::getInstance();
-        $query=<<<sql
-        SELECT * FROM utilerias_log
-sql;
-      return $mysqli->queryAll($query);
         
     }
     public static function getById($id){

@@ -57,7 +57,6 @@ html;
     $utileriasHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_utilerias", 1) == 0) ? "style=\"display:none;\"" : "";
 
     View::set('permisoGlobalHidden', $permisoGlobalHidden);
-    View::set('asideMenu',$this->_contenedor->asideMenu());
     View::set('asistentesHidden', $asistentesHidden);
     View::set('vuelosHidden', $vuelosHidden);
     View::set('pickUpHidden', $pickUpHidden);

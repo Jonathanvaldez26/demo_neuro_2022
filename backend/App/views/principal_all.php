@@ -1,16 +1,16 @@
 <?php echo $header; ?>
-<title>
-    Principal - MUSA - GRUPO LAHE
-</title>
+
 <body class="g-sidenav-show  bg-gray-100">
-    <!-- <aside class="bg-white-aside sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+    <aside class="bg-white-aside sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
         <div class="sidenav-header" style="margin-bottom: 30px;">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
 
             <a class="navbar-brand m-0" href="/Principal/" target="_blank">
                 <img src="/assets/img/favicon.png" class="navbar-brand-img h-100" alt="main_logo">
-                <span class="ms-1 font-weight-bold"></span>
-                <p style="margin-top: 15px;"><span class="fa fa-user morado-musa-text"></span> <?php echo $_SESSION['nombre'];?></p>
+                <span class="ms-1 font-weight-bold">ADMIN CONVENCIÓN</span>
+
+
+                <p style="margin-top: 15px;"><span class="fa fa-user" style="color: #344767"></span> <?php echo $_SESSION['nombre'];?></p>
             </a>
 
 
@@ -23,16 +23,55 @@
                 <li class="nav-item">
                     <a href="/Principal/" class="nav-link active" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-home text-white" ></span>
+                            <span class="fa fa-home" style="color: white"></span>
                         </div>
                         <span class="nav-link-text ms-1">Principal</span>
                     </a>
                 </li>
 
+                <li class="nav-item" <?= $permisoGlobalHidden; ?>>
+                    <a data-bs-toggle="collapse" onclick="catalogos()" href="#catalogos" class="nav-link " aria-controls="catalogos" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-sitemap" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Catálogos</span>
+                    </a>
+                    <div class="collapse " id="catalogos" hidden>
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Bu/">
+                                    <span class="sidenav-mini-icon"> E </span>
+                                    <span class="sidenav-normal">Bu Asofarma</span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Lineas/">
+                                    <span class="sidenav-mini-icon"></span>
+                                    <span class="sidenav-normal">Lineas Asofarma</span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Posiciones/">
+                                    <span class="sidenav-mini-icon"> P </span>
+                                    <span class="sidenav-normal"> Posiciones Asofarma </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Restaurantes/">
+                                    <span class="sidenav-mini-icon"> E </span>
+                                    <span class="sidenav-normal"> Restaurates </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <hr class="horizontal dark" />
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 <li class="nav-item" <?= $asistentesHidden; ?>>
                     <a href="/Asistentes/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-users morado-musa-text"></span>
+                            <span class="fa fa-users" style="color: #344767"></span>
                         </div>
                         <span class="nav-link-text ms-1">Asistentes</span>
                     </a>
@@ -40,7 +79,7 @@
                 <li class="nav-item" <?= $vuelosHidden; ?>>
                     <a href="/Vuelos/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-plane morado-musa-text"></span>
+                            <span class="fa fa-plane" style="color: #344767"></span>
                         </div>
                         <span class="nav-link-text ms-1">Vuelos</span>
                     </a>
@@ -48,7 +87,7 @@
                 <li class="nav-item" <?= $pickUpHidden; ?>>
                     <a href="/PickUp/" class="nav-link " aria-controls="ecommerceExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-bus morado-musa-text"></span>
+                            <span class="fa fa-bus" style="color: #344767"></span>
                         </div>
                         <span class="nav-link-text ms-1">PickUp</span>
                     </a>
@@ -56,7 +95,7 @@
                 <li class="nav-item" <?= $habitacionesHidden; ?>>
                     <a href="/Habitaciones/" class="nav-link " aria-controls="authExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-hotel morado-musa-text"></span>
+                            <span class="fa fa-hotel" style="color: #344767"></span>
                         </div>
                         <span class="nav-link-text ms-1">Habitaciones</span>
                     </a>
@@ -64,7 +103,7 @@
                 <li class="nav-item" <?= $cenasHidden; ?>>
                     <a href="/Cenas/" class="nav-link " aria-controls="authExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-coffee morado-musa-text"></span>
+                            <span class="fa fa-coffee" style="color: #344767"></span>
                         </div>
                         <span class="nav-link-text ms-1">Cenas</span>
                     </a>
@@ -72,7 +111,7 @@
                 <li class="nav-item" <?= $aistenciasHidden; ?>>
                     <a href="/Asistencias/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-bell morado-musa-text"></span>
+                            <span class="fa fa-bell" style="color: #344767"></span>
                         </div>
                         <span class="nav-link-text ms-1">Asistencias</span>
                     </a>
@@ -84,7 +123,7 @@
                 <li class="nav-item" <?= $vacunacionHidden; ?>>
                     <a href="/ComprobantesVacunacion/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-shield-virus morado-musa-text"></span>
+                            <span class="fa fa-shield-virus" style="color: #344767"></span>
                         </div>
                         <span class="nav-link-text ms-1">Comprobante Vacunación</span>
                     </a>
@@ -92,7 +131,7 @@
                 <li class="nav-item" <?= $pruebasHidden; ?>>
                     <a href="/PruebasCovidUsuarios/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-virus-slash morado-musa-text"></span>
+                            <span class="fa fa-virus-slash" style="color: #344767"></span>
                         </div>
                         <span class="nav-link-text ms-1">Pruebas Covid Usuarios</span>
                     </a>
@@ -101,7 +140,7 @@
                 <li class="nav-item" <?= $pruebasHidden; ?>>
                     <a href="/PruebasCovidEnSitio/" class="nav-link" aria-controls="basicExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-virus morado-musa-text" ></span>
+                            <span class="fa fa-virus" ></span>
                         </div>
                         <span class="nav-link-text ms-1">Pruebas Covid En Sitio</span>
                     </a>
@@ -114,7 +153,7 @@
                 <li class="nav-item" <?= $configuracionHidden; ?>>
                     <a href="/Configuracion/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-tools morado-musa-text"></span>
+                            <span class="fa fa-tools" style="color: #344767"></span>
                         </div>
                         <span class="nav-link-text ms-1">Configuración</span>
                     </a>
@@ -122,7 +161,7 @@
                 <li class="nav-item" <?= $utileriasHidden; ?>>
                     <a data-bs-toggle="collapse" onclick="utilerias()" href="#utilerias" class="nav-link " aria-controls="utilerias" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-user-circle-o morado-musa-text"></span>
+                            <span class="fa fa-user-circle-o" style="color: #344767"></span>
                         </div>
                         <span class="nav-link-text ms-1">Utilerias</span>
                     </a>
@@ -152,8 +191,7 @@
             </ul>
         </div>
 
-    </aside> -->
-    <?php echo $asideMenu;?>
+    </aside>
     <main class="main-content  ">
         <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 px-0 mx-4 shadow-none border-radius-xl z-index-sticky" id="navbarBlur" data-scroll="true">
@@ -299,6 +337,241 @@
         </nav>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
+
+            <!-- <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body p-3 position-relative">
+                        <div class="row">
+                            <div class="col-7 text-start">
+                                <p class="text-sm mb-1 text-capitalize font-weight-bold">Total de Usuarios con Acceso al Registro</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                    $230,220
+                                </h5>
+                                <span class="text-sm text-end text-success font-weight-bolder mt-auto mb-0">+55% <span class="font-weight-normal text-secondary">since last month</span></span>
+                            </div>
+                            <div class="col-5">
+                                <div class="dropdown text-end">
+                                    <a href="javascript:;" class="cursor-pointer text-secondary" id="dropdownUsers1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="text-xs text-secondary">6 May - 7 May</span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end px-2 py-3" aria-labelledby="dropdownUsers1">
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Last 7 days</a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Last week</a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Last 30 days</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 mt-sm-0 mt-4">
+                <div class="card">
+                    <div class="card-body p-3 position-relative">
+                        <div class="row">
+                            <div class="col-7 text-start">
+                                <p class="text-sm mb-1 text-capitalize font-weight-bold">Total de Usuarios Registrados Activos</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                    3.200
+                                </h5>
+                                <span class="text-sm text-end text-success font-weight-bolder mt-auto mb-0">+12% <span class="font-weight-normal text-secondary">since last month</span></span>
+                            </div>
+                            <div class="col-5">
+                                <div class="dropdown text-end">
+                                    <a href="javascript:;" class="cursor-pointer text-secondary" id="dropdownUsers2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="text-xs text-secondary">6 May - 7 May</span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end px-2 py-3" aria-labelledby="dropdownUsers2">
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Last 7 days</a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Last week</a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Last 30 days</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 mt-sm-0 mt-4">
+                <div class="card">
+                    <div class="card-body p-3 position-relative">
+                        <div class="row">
+                            <div class="col-7 text-start">
+                                <p class="text-sm mb-1 text-capitalize font-weight-bold">Total de Usuarios Dados de Baja</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                    $1.200
+                                </h5>
+                                <span class="font-weight-normal text-secondary text-sm"><span class="font-weight-bolder">+$213</span> since last month</span>
+                            </div>
+                            <div class="col-5">
+                                <div class="dropdown text-end">
+                                    <a href="javascript:;" class="cursor-pointer text-secondary" id="dropdownUsers3" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="text-xs text-secondary">6 May - 7 May</span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end px-2 py-3" aria-labelledby="dropdownUsers3">
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Last 7 days</a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Last week</a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Last 30 days</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-4 col-sm-6">
+                <div class="card h-100">
+                    <div class="card-header pb-0 p-3">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-0">Vuelos</h6>
+                            <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="See traffic channels">
+                                <i class="fas fa-info" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0 p-3 mt-4">
+                        <div class="row">
+                            <div class="col-7 text-start">
+                                <div class="chart">
+                                    <canvas id="chart-pie" class="chart-canvas" height="200" style="display: block; box-sizing: border-box; height: 200px; width: 166.8px;" width="166"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-5 my-auto">
+                  <span class="badge badge-md badge-dot me-4 d-block text-start">
+                    <i class="bg-info"></i>
+                    <span class="text-dark text-xs">Facebook</span>
+                  </span>
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                    <i class="bg-primary"></i>
+                    <span class="text-dark text-xs">Direct</span>
+                  </span>
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                    <i class="bg-dark"></i>
+                    <span class="text-dark text-xs">Organic</span>
+                  </span>
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                    <i class="bg-secondary"></i>
+                    <span class="text-dark text-xs">Referral</span>
+                  </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer pt-0 pb-0 p-3 d-flex align-items-center">
+                        <div class="w-60">
+                            <p class="text-sm">
+                                More than <b>1,200,000</b> sales are made using referral marketing, and <b>700,000</b> are from social media.
+                            </p>
+                        </div>
+                        <div class="w-40 text-end">
+                            <a class="btn bg-light mb-0 text-end" href="javascript:;">Read more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="card h-100">
+                    <div class="card-header pb-0 p-3">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-0">Vuelos</h6>
+                            <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="See traffic channels">
+                                <i class="fas fa-info" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0 p-3 mt-4">
+                        <div class="row">
+                            <div class="col-7 text-start">
+                                <div class="chart">
+                                    <canvas id="chart-pie" class="chart-canvas" height="200" style="display: block; box-sizing: border-box; height: 200px; width: 166.8px;" width="166"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-5 my-auto">
+                  <span class="badge badge-md badge-dot me-4 d-block text-start">
+                    <i class="bg-info"></i>
+                    <span class="text-dark text-xs">Facebook</span>
+                  </span>
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                    <i class="bg-primary"></i>
+                    <span class="text-dark text-xs">Direct</span>
+                  </span>
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                    <i class="bg-dark"></i>
+                    <span class="text-dark text-xs">Organic</span>
+                  </span>
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                    <i class="bg-secondary"></i>
+                    <span class="text-dark text-xs">Referral</span>
+                  </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer pt-0 pb-0 p-3 d-flex align-items-center">
+                        <div class="w-60">
+                            <p class="text-sm">
+                                More than <b>1,200,000</b> sales are made using referral marketing, and <b>700,000</b> are from social media.
+                            </p>
+                        </div>
+                        <div class="w-40 text-end">
+                            <a class="btn bg-light mb-0 text-end" href="javascript:;">Read more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="card h-100">
+                    <div class="card-header pb-0 p-3">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-0">Vuelos</h6>
+                            <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="See traffic channels">
+                                <i class="fas fa-info" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0 p-3 mt-4">
+                        <div class="row">
+                            <div class="col-7 text-start">
+                                <div class="chart">
+                                    <canvas id="chart-pie" class="chart-canvas" height="200" style="display: block; box-sizing: border-box; height: 200px; width: 166.8px;" width="166"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-5 my-auto">
+                  <span class="badge badge-md badge-dot me-4 d-block text-start">
+                    <i class="bg-info"></i>
+                    <span class="text-dark text-xs">Facebook</span>
+                  </span>
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                    <i class="bg-primary"></i>
+                    <span class="text-dark text-xs">Direct</span>
+                  </span>
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                    <i class="bg-dark"></i>
+                    <span class="text-dark text-xs">Organic</span>
+                  </span>
+                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                    <i class="bg-secondary"></i>
+                    <span class="text-dark text-xs">Referral</span>
+                  </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer pt-0 pb-0 p-3 d-flex align-items-center">
+                        <div class="w-60">
+                            <p class="text-sm">
+                                More than <b>1,200,000</b> sales are made using referral marketing, and <b>700,000</b> are from social media.
+                            </p>
+                        </div>
+                        <div class="w-40 text-end">
+                            <a class="btn bg-light mb-0 text-end" href="javascript:;">Read more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+
             <div class="row">
                 <div class="col-lg-12 position-relative z-index-2">
                     <div class="card card-plain">
@@ -307,7 +580,7 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="d-flex flex-column h-100">
-                                            <h4 class="m-4">¡Bienvenido a tu administrador equipo GRUPO LAHE!<br><strong>MUSA 2022</strong></h4>
+                                            <h4 class="m-4">¡Bienvenido a tu administrador equipo GRUPO LAHE!<br><strong>Convención Nacional de Ventas 2022</strong></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -318,14 +591,6 @@
             </div>
 
             <div class="row">
-                <div class="col-12 col-lg-6">
-                    <div class="card card-plain">
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" >
                 <div class="col-12 col-lg-6 col-md-4 position-relative z-index-2">
                     <div class="card card-plain">
                         <div class="card-body p-3">
@@ -335,8 +600,8 @@
                                         <div class="card up-card">
                                             <div class="row m-4">
                                                 <div class="col-3">
-                                                    <div class="bg-gradient-musa avatar avatar-l position-relative">
-                                                        <span class="fas fa-syringe m-3 text-white" style="font-size: x-large;"></span>
+                                                    <div class="bg-gradient-red avatar avatar-l position-relative">
+                                                        <span class="fas fa-syringe m-3" style="font-size: x-large;"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-9 m-auto">
@@ -367,8 +632,8 @@
                                         <div class="card up-card">
                                             <div class="row m-4">
                                                 <div class="col-3">
-                                                    <div class="bg-gradient-musa avatar avatar-l position-relative" >
-                                                        <span class="fas fa-plane m-3 text-white" style="font-size: x-large;"></span>
+                                                    <div class="bg-gradient-red avatar avatar-l position-relative" >
+                                                        <span class="fas fa-plane m-3" style="font-size: x-large;"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-9 m-auto">
@@ -399,8 +664,8 @@
                                         <div class="card up-card">
                                             <div class="row m-4">
                                                 <div class="col-3">
-                                                    <div class="bg-gradient-musa avatar avatar-l position-relative" >
-                                                        <span class="fas fa-virus-slash m-3 text-white" style="font-size: x-large;"></span>
+                                                    <div class="bg-gradient-red avatar avatar-l position-relative" >
+                                                        <span class="fas fa-virus-slash m-3" style="font-size: x-large;"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-9 m-auto">
@@ -423,11 +688,12 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-2 position-relative z-index-2">
-                <class class="col-12-col-md-6">
-                    <div class="row">
-                        <div class="col-12 col-md-6">
-                            <div class="row z-index-2">
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-6 col-md-4 position-relative z-index-2">
+                    <div class="card card-plain">
+                        <div class="card-body p-3">
+                            <div class="row">
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="row m-4">
@@ -453,9 +719,8 @@
                             </div>
                         </div>
                     </div>
-                </class>
+                </div>
             </div>
-            
             <div class="row mt-4">
                 <div class="col-lg-5 mb-lg-0 mb-4">
                     <div class="card z-index-2">
@@ -496,15 +761,23 @@
             </div>
 
             <br>
+            <!-- <footer class="footer pt-3  ">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6 mb-lg-0 mb-4">
+                        <div class="copyright text-center text-sm text-muted text-lg-start">
+                            © <script>
+                                document.write(new Date().getFullYear())
+                            </script> - 2022,
+                            made with <i class="fa fa-heart" aria-hidden="true"></i> by
+                            <a href="" class="font-weight-bold" target="_blank">Creative Grupo LAHE</a>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer> -->
         </div>
     </main>
 </body>
-
-<script>
-    $(document).ready(function (){
-        $('#principal a').addClass('active');
-        $('#principal .fa-home').addClass('text-white');
-    });
-</script>
 
 <?php echo $footer; ?>

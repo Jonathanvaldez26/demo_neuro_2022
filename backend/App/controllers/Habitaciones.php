@@ -559,7 +559,6 @@ html;
     View::set('th_table_fechas', $th_table_fechas);
     View::set('fecha_inicio_evento', $fecha_inicio_evento);
     View::set('fecha_fin_evento', $fecha_fin_evento);
-    View::set('asideMenu',$this->_contenedor->asideMenu());
     View::set('header', $this->_contenedor->header());
     View::set('footer', $this->_contenedor->footer());
     View::render("habitaciones_all");

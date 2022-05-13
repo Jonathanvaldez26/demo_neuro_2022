@@ -10,7 +10,7 @@
                 <div class="card card-body mt-n6 overflow-hidden m-5">
                     <div class="row mb-0" >
                         <div class="col-auto">
-                            <div class="bg-gradient-musa avatar avatar-xl position-relative">
+                            <div class="bg-gradient-red avatar avatar-xl position-relative">
                                 <!-- <img src="../../assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm"> -->
                                 <span class="fa fa-bell" style="font-size: xx-large;"></span>
                             </div>
@@ -72,21 +72,49 @@
                                                         </div>
                                                     </div>
                                                     <!-- <div class="card-body"> -->
-                                                    <div class="row m-2">
-                                                        <div class="col-5">
-                                                            <img class="w-100 h-100 avatar" id="img_asistente" src="/img/user.png" alt="user">
+                                                        <div class="row m-2">
+                                                            <div class="col-5">
+                                                                <img class="w-100 h-100 avatar" id="img_asistente" src="/img/user.png" alt="user">
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <h6>Linea: <span class="text-thin" id="linea_user"> Ninguna</span></h6> 
+                                                                <h6>Bu: <span class="text-thin" id="bu_user"> Ninguna</span></h6>
+                                                                <h6>Posicion: <span class="text-thin" id="posicion_user"> Ninguna</span></h6> 
+                                                            </div>
                                                         </div>
-                                                        <div class="col-6">
-                                                            <h6>Especialidad: <span class="text-thin" id="especialidad_user"> Ninguna</span></h6> 
-                                                            <!-- <h6>Bu: <span class="text-thin" id="bu_user"> Ninguna</span></h6>
-                                                            <h6>Posicion: <span class="text-thin" id="posicion_user"> Ninguna</span></h6>  -->
+                                                        <br>
+                                                        <div class="row m-2">
+                                                            <h6>Correo: <span class="text-thin" id="correo_user"> _____</span></h6> 
+                                                            <h6>Teléfono: <span class="text-thin" id="telefono_user"> 00 0000 0000</span></h6> 
                                                         </div>
-                                                    </div>
-                                                    <br>
-                                                    <div class="row m-2">
-                                                        <h6>Correo: <span class="text-thin" id="correo_user"> _____</span></h6> 
-                                                        <h6>Teléfono: <span class="text-thin" id="telefono_user"> 00 0000 0000</span></h6> 
-                                                    </div>
+                                                        <!-- <div class="row">
+                                                            <div class="col-7 text-start">
+                                                                <div class="chart">
+                                                                    <canvas id="chart-pie" class="chart-canvas" height="400" style="display: block; box-sizing: border-box; height: 200px; width: 244.5px;" width="489"></canvas>
+                                                                    <img src="https://www.muniplibre.gob.pe/assets/img/logos/usuario.jpg" alt="user">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-5 my-auto">
+                                                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                                                    <i class="bg-info"></i>
+                                                                    <span class="text-dark text-xs">Facebook</span>
+                                                                </span>
+                                                                                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                                                    <i class="bg-primary"></i>
+                                                                    <span class="text-dark text-xs">Direct</span>
+                                                                </span>
+                                                                                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                                                    <i class="bg-dark"></i>
+                                                                    <span class="text-dark text-xs">Organic</span>
+                                                                </span>
+                                                                                                <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                                                    <i class="bg-secondary"></i>
+                                                                    <span class="text-dark text-xs">Referral</span>
+                                                                </span>
+                                                            </div>
+                                                        </div> -->
+                                                    <!-- </div> -->
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-lg-8 col-sm-6 mt-sm-0 mt-4">
@@ -110,7 +138,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="text-center">
-                                                            <button onclick="focus_input()" class="btn bg-gradient-pink w-100 my-0 mb-5 ms-auto" type="submit" id="btn_registro_email">Verifica tu Código</button>
+                                                            <button onclick="focus_input()" class="btn bg-gradient-danger w-100 my-0 mb-5 ms-auto" type="submit" id="btn_registro_email">Verifica tu Código</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -263,17 +291,17 @@
 
         var table = $('#lista-reg').DataTable({
             "drawCallback": function( settings ) {
-                $('.current').addClass("btn bg-gradient-musa btn-rounded").removeClass("paginate_button");
+                $('.current').addClass("btn bg-gradient-danger btn-rounded").removeClass("paginate_button");
                 $('.paginate_button').addClass("btn").removeClass("paginate_button");
                 $('.dataTables_length').addClass("m-4");
                 $('.dataTables_info').addClass("mx-4");
                 $('.dataTables_filter').addClass("m-4");
                 $('input').addClass("form-control");
                 $('select').addClass("form-control");
-                $('.previous.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2");
-                $('.next.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2");
-                $('.previous').addClass("btn-outline-info btn-rounded mx-2");
-                $('.next').addClass("btn-outline-info btn-rounded mx-2");
+                $('.previous.disabled').addClass("btn-outline-danger opacity-5 btn-rounded mx-2");
+                $('.next.disabled').addClass("btn-outline-danger opacity-5 btn-rounded mx-2");
+                $('.previous').addClass("btn-outline-danger btn-rounded mx-2");
+                $('.next').addClass("btn-outline-danger btn-rounded mx-2");
                 $('a.btn').addClass("btn-rounded");
                 $('.odd').addClass("bg-gray-conave-100");
             },
@@ -378,10 +406,10 @@
                     console.log("Procesando....");
                 },
                 success: function(respuesta) {
-                    console.log(respuesta);
+                    console.log(respuesta.status);
                     if (respuesta.status == 'success') {
-                        // console.log(respuesta);
-                        // console.log(respuesta.msg_insert);
+                        console.log(respuesta);
+                        console.log(respuesta.msg_insert);
                         let nombre_completo = respuesta.datos.nombre+' '+respuesta.datos.segundo_nombre+' '+respuesta.datos.apellido_paterno +' '+respuesta.datos.apellido_materno;
                         $("#nombre_completo").html(nombre_completo);
                         $("#correo_user").html(respuesta.datos.email);
@@ -392,18 +420,30 @@
                             if (respuesta.datos.img == null) {
                                 $("#img_asistente").attr('src','/img/user.png')
                             }else{
-                                $("#img_asistente").attr('src','/img/users_conave/'+respuesta.datos.img);
+                                $("#img_asistente").attr('src','http://convencionasofarma2022.mx/img/users_conave/'+respuesta.datos.img);
                             }
                         } else {
                             $("#img_asistente").attr('src','/img/user.png');
                         }
 
-                        // console.log(respuesta.especialidades['0']);
-                        // $("#especialidad_user").html(respuesta.especialidades['0'].nombre);
-                        for (let index = 0; index < respuesta.especialidades.length; index++) {
-                            const element = respuesta.especialidades[index];
-                            if (element.id_especialidad == respuesta.datos.especialidad) {
-                                $("#especialidad_user").html(element.nombre);
+                        for (let index = 0; index < respuesta.linea_principal.length; index++) {
+                            const element = respuesta.linea_principal[index];
+                            if (element.id_linea_principal == respuesta.datos.id_linea_principal) {
+                                $("#linea_user").html(element.nombre);
+                            }
+                        }
+
+                        for (let index = 0; index < respuesta.bu.length; index++) {
+                            const element = respuesta.bu[index];
+                            if (element.id_bu == respuesta.datos.id_bu) {
+                                $("#bu_user").html(element.nombre);
+                            }
+                        }
+
+                        for (let index = 0; index < respuesta.posiciones.length; index++) {
+                            const element = respuesta.posiciones[index];
+                            if (element.id_posicion == respuesta.datos.id_posicion) {
+                                $("#posicion_user").html(element.nombre);
                             }
                         }
 
@@ -430,7 +470,10 @@
                         } else {
                             // window.location.replace("/RegistroAsistencia/codigo/"+clave_a);
                         }
-                    } else  {
+                        
+                        // mostrarDatos(clave_a);
+                        // let tabla_registrados = $("#lista-reg");
+                    } else if (respuesta.status == 'fail_user') {
                         Swal.fire({
                             title: '¡Lo sentimos, esta persona no se encuentra registrada en nuestra base de datos!',
                             icon: 'warning',
@@ -448,13 +491,38 @@
                         })
                         $("#nombre_completo").html('Nombre');
                         $("#img_asistente").attr('src','/img/user.png');
-                        $("#especialidad_user").html('Ninguna');
+                        $("#linea_user").html('Ninguna');
+                        $("#bu_user").html('Ninguna');
+                        $("#posicion_user").html('Ninguna');
+                        $("#correo_user").html('_____');
+                        $("#telefono_user").html('00 0000 0000');
+                        console.log(respuesta);
+                    }else {
+                        Swal.fire({
+                            title: '¡Lo sentimos, esta persona no pertenece a la línea!',
+                            icon: 'warning',
+                            timer: 1000,
+                            didOpen: () => {
+                                const b = Swal.getHtmlContainer().querySelector('b')
+                                timerInterval = setInterval(() => {
+                                }, 100)
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                            }
+                            }).then((result) => {
+                            $("#codigo_registro").focus();
+                        })
+                        $("#nombre_completo").html('Nombre');
+                        $("#img_asistente").attr('src','/img/user.png');
+                        $("#linea_user").html('Ninguna');
                         $("#bu_user").html('Ninguna');
                         $("#posicion_user").html('Ninguna');
                         $("#correo_user").html('_____');
                         $("#telefono_user").html('00 0000 0000');
                         console.log(respuesta);
                     }
+                   
                 },
                 error: function(respuesta) {
                     console.log(respuesta);
@@ -481,6 +549,12 @@
                         }).then((result) => {
                         $("#codigo_registro").focus();
                     })
+                    // $("#nombre_completo").html('Nombre');
+                    // $("#img_asistente").attr('src','/img/user.png');
+                    // $("#linea_user").html('Ninguna');
+                    // $("#bu_user").html('Ninguna');
+                    // $("#correo_user").html('_____');
+                    // $("#telefono_user").html('00 0000 0000');
                 }
     
             });

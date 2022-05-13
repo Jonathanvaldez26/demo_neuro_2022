@@ -3,7 +3,6 @@
 namespace App\controllers;
 
 defined("APPPATH") or die("Access denied");
-require_once dirname(__DIR__) . '/../public/librerias/mpdf/mpdf.php';
 require_once dirname(__DIR__) . '/../public/librerias/fpdf/fpdf.php';
 require_once dirname(__DIR__) . '/../public/librerias/phpqrcode/qrlib.php';
 
@@ -28,8 +27,8 @@ class RegistroAsistencia
         $extraHeader = <<<html
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="apple-touch-icon" sizes="76x76" href="https://foromusa.com/assets/images/Musa0-01.png">
-        <link rel="icon" type="image/png" href="https://foromusa.com/assets/images/Musa0-01.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.png">
+        <link rel="icon" type="image/png" href="/assets/img/favicon.png">
         <title>
             Asistencia CONAVE Convención 2022 ASOFARMA
         </title>
@@ -106,7 +105,11 @@ html;
                     <u><a href="https://api.whatsapp.com/send?phone=52{$value['telefono']}&text=Buen%20d%C3%ADa,%20te%20contacto%20de%20parte%20del%20Equipo%20Grupo%20LAHE%20%F0%9F%98%80" target="_blank"><span class="fa fa-whatsapp" style="color:green;"> </span> {$value['telefono']}</a></u>
                 </td>
                 <td>
-                    <b>Especialidad: </b>{$value['nombre_especialidad']}
+                    <b>Línea: </b>{$value['nombre_linea']}
+                    <br>
+                    <b>BU: </b>{$value['nombre_bu']}
+                    <br>
+                    <b>Posición: </b>{$value['nombre_posicion']} 
                 </td>
                 
 html;
@@ -178,15 +181,33 @@ html;
         echo json_encode($delete_registrado);
     }
 
-    public function registroAsistencia($clave, $code){
-        
+    public function registroAsistencia($clave, $code)
+    {
+
+        var_dump($clave);
+        exit;
+
+        $clave_habitacion = '';
+        $id_asigna_habitacion = '';
+
         $user_clave = RegistroAsistenciaDao::getInfo($clave)[0];
-        $especialidades = RegistroAsistenciaDao::getEspecialidades();
+        $existe_user = RegistroCheckInDao::getInfo($clave);
+        $linea_principal = RegistroAsistenciaDao::getLineaPrincipial();
+        $bu = RegistroAsistenciaDao::getBu();
+        $posiciones = RegistroAsistenciaDao::getPosiciones();
         $asistencia = RegistroAsistenciaDao::getIdRegistrosAsistenciasByCode($code)[0];
+
+        $habitaciones = HabitacionesDao::getAsignaHabitacionByIdRegAcceso($user_clave['id_registro_acceso'])[0];
+        if ($habitaciones) {
+            $clave_habitacion = $habitaciones['clave'];
+            $id_asigna_habitacion = $habitaciones['id_asigna_habitacion'];
+            $numero_habitacion = $habitaciones['id_habitacion'];
+        }
+
 
         $fecha = new DateTime('now', new DateTimeZone('America/Cancun'));
         $hora_actual = substr($fecha->format(DATE_RFC822), 15, 5);
-        $a_tiempo = '';
+        // $a_tiempo = '';
 
         if (
             intval(substr($hora_actual, 0, 2)) > intval(substr($asistencia['hora_asistencia_inicio'], 0, 2))
@@ -210,6 +231,10 @@ html;
             $a_tiempo = 2;
             $aqui = 4;
         }
+        // || substr($hora_actual,0,2) > substr($asistencia['hora_asistencia_fin'],0,2)
+
+
+        if ($existe_user) {
             if ($user_clave) {
                 $hay_asistente = RegistroAsistenciaDao::findAsistantById($user_clave['utilerias_asistentes_id'], $asistencia['id_asistencia'])[0];
                 if ($hay_asistente) {
@@ -221,7 +246,9 @@ html;
     
                 $data = [
                     'datos' => $user_clave,
-                    'especialidades' => $especialidades,
+                    'linea_principal' => $linea_principal,
+                    'bu' => $bu,
+                    'posiciones' => $posiciones,
                     'status' => 'success',
                     'msg_insert' => $msg_insert,
                     'hay_asistente' => $hay_asistente,
@@ -231,17 +258,25 @@ html;
                     'aqui' => $aqui,
                     'hora_actual' => intval(substr($hora_actual, 0, 2)),
                     'hora_fin' => intval(substr($asistencia['hora_asistencia_fin'], 0, 2)),
+                    'clave_habitacion' => $clave_habitacion,
+                    'id_asigna_habitacion' => $id_asigna_habitacion,
+                    'numero_habitacion' => $numero_habitacion
                 ];
             } else {
                 $data = [
                     'status' => 'fail'
                 ];
             }
+        } else {
+            $data = [
+                'datos'=>$user_clave,
+                'linea'=>$linea,    
+                'status'=>'fail_user'
+            ];
+        }
 
         echo json_encode($data);
     }
-
-
 
     public function registroAsistenciaCheckin($clave, $code)
     {
@@ -250,7 +285,7 @@ html;
         $id_asigna_habitacion = '';
 
         $user_clave = RegistroAsistenciaDao::getInfo($clave)[0];
-        $linea_principal = RegistroAsistenciaDao::getEspecialidades();
+        $linea_principal = RegistroAsistenciaDao::getLineaPrincipial();
         $bu = RegistroAsistenciaDao::getBu();
         $posiciones = RegistroAsistenciaDao::getPosiciones();
         $asistencia = RegistroAsistenciaDao::getIdRegistrosAsistenciasByCode($code)[0];
@@ -382,7 +417,7 @@ html;
         $this->generaterQr($clave_ticket);
         $datos_user = AsistentesDao::getRegistroAccesoByClaveRA($clave)[0];
 
-        $nombre_completo = $datos_user['nombre'] . "\n" . $datos_user['segundo_nombre'] . " " . $datos_user['apellido_paterno'] . "\n" . $datos_user['apellido_materno'];
+        $nombre_completo = $datos_user['nombre'] . " " . $datos_user['segundo_nombre'] . " " . $datos_user['apellido_paterno'] . " " . $datos_user['apellido_materno'];
         
 
         $pdf = new \FPDF($orientation = 'P', $unit = 'mm', array(390, 152));
@@ -390,21 +425,19 @@ html;
         $pdf->SetFont('Arial', 'B', 8);    //Letra Arial, negrita (Bold), tam. 20
         $pdf->setY(1);
         $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Image('qrs/gafetes/'.$clave_ticket.'.png', 50, 50, 50, 50);
-        $pdf->SetFont('Arial', 'B', 25);
-        $pdf->Multicell(133, 80, $clave_ticket, 0, 'C');
+        $pdf->Image('qrs/gafetes/'.$clave_ticket.'.png', 27, 40, 100, 100);
 
         //$pdf->Image('1.png', 1, 0, 190, 190);
-        $pdf->SetFont('Arial', 'B', 5);    //Letra Arial, negrita (Bold), tam. 20
+        $pdf->SetFont('Arial', '', 5);    //Letra Arial, negrita (Bold), tam. 20
         //$nombre = utf8_decode("Jonathan Valdez Martinez");
         //$num_linea =utf8_decode("Línea: 39");
         //$num_linea2 =utf8_decode("Línea: 39");
 
-        $pdf->SetXY(0, 250);
-        $pdf->SetFont('Arial', 'B', 30);
+        $pdf->SetXY(18.3, 300);
+        $pdf->SetFont('Times', 'B', 35);
         #4D9A9B
         $pdf->SetTextColor(0, 0, 0);
-        $pdf->Multicell(90, 10, $nombre_completo, 0, 'C');
+        $pdf->Multicell(120, 10, $nombre_completo, 0, 'C');
         $pdf->output();
     }
 
@@ -452,8 +485,6 @@ html;
 
         //   $url = explode('/', $qrcode );
     }
-
- 
 }
 
 

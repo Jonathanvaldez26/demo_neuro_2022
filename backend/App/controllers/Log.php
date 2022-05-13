@@ -18,8 +18,8 @@ class Log extends Controller{
         View::set('header',$this->_contenedor->header());
         View::set('footer',$this->_contenedor->footer());
 
-        // if(Controller::getPermisosUsuario($this->__usuario, "permisos_globales",1) == 0)
-        //   header('Location: /Principal/');
+        if(Controller::getPermisosUsuario($this->__usuario, "permisos_globales",1) == 0)
+          header('Location: /Principal/');
     }
 
     public function getUsuario(){
@@ -37,25 +37,8 @@ class Log extends Controller{
         }
       </style>
 html;
-
-      $log = LogDao::getAll();
-      $tabla = '';
-     
-      foreach ($log as $key => $value) {
-      
-      $tabla.=<<<html
-      <tr>
-        <td>{$value['fecha']}</td>
-        <td>{$value['usuario']}</td>
-        <td class="text-center">{$value['descripcion']}</td>
-        <td class="text-center">{$value['accion']}</td>
-      </tr>
- 
-html;
-      }
       View::set('header',$this->_contenedor->header($extraHeader));
       View::set('footer',$this->_contenedor->footer($extraFooter));
-      View::set('tabla',$tabla);
       View::render("log_all");
     }
 

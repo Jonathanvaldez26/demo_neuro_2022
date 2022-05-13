@@ -41,8 +41,6 @@ class Configuracion extends Controller
           padding: 0px;
         }
       </style>
-      <link rel="apple-touch-icon" sizes="76x76" href="https://foromusa.com/assets/images/Musa0-01.png">
-      <link rel="icon" type="image/png" href="https://foromusa.com/assets/images/Musa0-01.png">
 html;
 
     $permisoGlobalHidden = (Controller::getPermisoGlobalUsuario($this->__usuario)[0]['permisos_globales']) != 1 ? "style=\"display:none;\"" : "";
@@ -69,7 +67,6 @@ html;
     View::set('pruebasHidden', $pruebasHidden);
     View::set('configuracionHidden', $configuracionHidden);
     View::set('utileriasHidden', $utileriasHidden);
-    View::set('asideMenu',$this->_contenedor->asideMenu());
     View::set('header', $this->_contenedor->header($extraHeader));
     View::set('footer', $this->_contenedor->footer($extraFooter));
     View::render("configuracion_all");

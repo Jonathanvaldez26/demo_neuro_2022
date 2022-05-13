@@ -7,29 +7,21 @@ use \App\interfaces\Crud;
 use \App\controllers\UtileriasLog;
 
 class Administradores implements Crud{
-//     public static function getAll(){
-//         $mysqli = Database::getInstance();
-//         $query=<<<sql
-//             SELECT a.utilerias_administradores_id, a.nombre, a.usuario, a.perfil_id, a.descripcion, a.status, a.code, s.nombre AS nombre_status, p.nombre AS nombre_perfil
-//             FROM utilerias_administradores AS a
-//             INNER JOIN utilerias_permisos AS per ON (a.usuario = per.usuario)
-//             INNER JOIN catalogo_status AS s ON (a.status = s.catalogo_status_id)
-//             INNER JOIN utilerias_perfiles AS p ON(a.perfil_id = p.perfil_id)
-//             WHERE a.usuario = per.usuario AND a.status = 1
-// sql;
-//         return $mysqli->queryAll($query);
-//     }
-
     public static function getAll(){
-      $mysqli = Database::getInstance();
-      $query=<<<sql
-      SELECT a.utilerias_administradores_id, a.nombre, a.usuario, a.perfil_id, a.descripcion, a.status, a.code, p.nombre AS nombre_perfil
-      FROM utilerias_administradores AS a
-      INNER JOIN utilerias_perfiles AS p ON(a.perfil_id = p.perfil_id)
-      WHERE  a.status = 1
+        $mysqli = Database::getInstance();
+        $query=<<<sql
+            SELECT a.utilerias_administradores_id, a.nombre, a.usuario, a.perfil_id, a.descripcion, a.status, a.code, s.nombre AS nombre_status, p.nombre AS nombre_perfil,
+            per.permisos_globales, per.seccion_principal, per.seccion_asistentes, per.seccion_bu, per.seccion_lineas, per.seccion_posiciones,
+            per.seccion_restaurantes, per.seccion_gafete, per.seccion_vuelos, per.seccion_pickup, per.seccion_habitaciones, per.seccion_cenas, per.seccion_vacunacion,
+            per.seccion_pruebas_covid, per.seccion_asistencias, per.seccion_utilerias, per.seccion_configuracion
+            FROM utilerias_administradores AS a
+            INNER JOIN utilerias_permisos AS per ON (a.usuario = per.usuario)
+            INNER JOIN catalogo_status AS s ON (a.status = s.catalogo_status_id)
+            INNER JOIN utilerias_perfiles AS p ON(a.perfil_id = p.perfil_id)
+            WHERE a.usuario = per.usuario AND a.status = 1
 sql;
-      return $mysqli->queryAll($query);
-  }
+        return $mysqli->queryAll($query);
+    }
     
     public static function getById($id){
         $mysqli = Database::getInstance();

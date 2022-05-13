@@ -5,7 +5,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="/Principal/" target="_blank">
             <img src="/assets/img/favicon.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold"></span>
+            <span class="ms-1 font-weight-bold">ADMIN CONVENCIÓN</span>
             <p style="margin-top: 15px;"><span class="fa fa-user" style="color: #344767"></span> <?php echo $_SESSION['nombre'];?></p>
         </a>
         
@@ -22,7 +22,51 @@
                     <span class="nav-link-text ms-1">Principal</span>
                 </a>
             </li>
-        
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" onclick="catalogos()" href="#catalogos" class="nav-link" aria-controls="catalogos" role="button" aria-expanded="true">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        <span class="fa fa-sitemap" style="color: #344767"></span>
+                    </div>
+                    <span class="nav-link-text ms-1">Catálogos</span>
+                </a>
+                <div class="collapse" id="catalogos" hidden>
+                    <ul class="nav ms-4 ps-3">
+                        <li class="nav-item ">
+                            <a class="nav-link " href="/Bu/">
+                                <span class="sidenav-mini-icon"> B </span>
+                                <span class="sidenav-normal">Bu Asofarma</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Lineas/" class="nav-link" role="button" aria-expanded="false">
+                                <span class="sidenav-mini-icon"> L </span>
+                                <span class="nav-link-text ms-1">Lineas Asofarma</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/Posiciones/">
+                            <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal"> Posiciones Asofarma  </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="/PickUp/">
+                                <span class="sidenav-mini-icon"> R </span>
+                                <span class="sidenav-normal"> Restaurates </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <hr class="horizontal dark" />
+                        </li>
+                        <!-- <li class="nav-item ">
+                            <a class="nav-link " href="/PickUp/">
+                                <span class="sidenav-mini-icon"> E </span>
+                                <span class="sidenav-normal"> Restaurates </span>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+            </li>
             <li class="nav-item">
                 <a href="/Asistentes/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">

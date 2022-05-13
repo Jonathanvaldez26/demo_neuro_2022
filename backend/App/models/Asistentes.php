@@ -151,9 +151,11 @@ sql;
     public static function getRegistroAccesoById($id){
       $mysqli = Database::getInstance();
       $query=<<<sql
-      SELECT ra.*, ra.ticket_virtual AS clave_ticket, CONCAT(ra.ticket_virtual,'.png') AS qr  FROM registros_acceso ra
+      SELECT ra.*, tv.clave AS clave_ticket, tv.qr FROM registros_acceso ra
       INNER JOIN utilerias_asistentes ua
       ON ra.id_registro_acceso = ua.id_registro_acceso
+      INNER JOIN ticket_virtual tv
+      ON tv.id_ticket_virtual = ra.id_ticket_virtual
       WHERE utilerias_asistentes_id = $id
 sql;
       return $mysqli->queryAll($query);
@@ -162,9 +164,11 @@ sql;
   public static function getRegistroAccesoByClaveRA($clave){
     $mysqli = Database::getInstance();
     $query=<<<sql
-    SELECT ra.*, ra.ticket_virtual AS clave_ticket, CONCAT(ra.ticket_virtual,'.png') AS qr FROM registros_acceso ra
+    SELECT ra.*, tv.clave AS clave_ticket, tv.qr FROM registros_acceso ra
     INNER JOIN utilerias_asistentes ua
     ON ra.id_registro_acceso = ua.id_registro_acceso
+    INNER JOIN ticket_virtual tv
+    ON tv.id_ticket_virtual = ra.id_ticket_virtual
     WHERE ra.clave = '$clave'
 sql;
     return $mysqli->queryAll($query);
@@ -241,7 +245,7 @@ sql;
     public static function update($data){
       $mysqli = Database::getInstance(true);
       $query=<<<sql
-      UPDATE registros_acceso SET nombre = :nombre, segundo_nombre = :segundo_nombre, apellido_materno = :apellido_materno, apellido_paterno = :apellido_paterno, fecha_nacimiento = :fecha_nacimiento, telefono = :telefono, alergia = :restricciones_alimenticias, alergia_cual = :restricciones_alimenticias_cual WHERE email = :email;
+      UPDATE registros_acceso SET nombre = :nombre, segundo_nombre = :segundo_nombre, apellido_materno = :apellido_materno, apellido_paterno = :apellido_paterno, fecha_nacimiento = :fecha_nacimiento, telefono = :telefono, alergias = :alergias, alergias_otro = :alergias_otro, alergia_medicamento = :alergia_medicamento, alergia_medicamento_cual = :alergia_medicamento_cual, restricciones_alimenticias = :restricciones_alimenticias, restricciones_alimenticias_cual = :restricciones_alimenticias_cual WHERE email = :email;
 sql;
       $parametros = array(
         
@@ -251,10 +255,10 @@ sql;
         ':apellido_materno'=>$data->_apellido_materno,
         ':fecha_nacimiento'=>$data->_fecha_nacimiento,
         ':telefono'=>$data->_telefono,
-        // ':alergias'=>$data->_alergias,
-        // ':alergias_otro'=>$data->_alergias_otro,
-        // ':alergia_medicamento'=>$data->_alergia_medicamento,
-        // ':alergia_medicamento_cual'=>$data->_alergia_medicamento_cual,
+        ':alergias'=>$data->_alergias,
+        ':alergias_otro'=>$data->_alergias_otro,
+        ':alergia_medicamento'=>$data->_alergia_medicamento,
+        ':alergia_medicamento_cual'=>$data->_alergia_medicamento_cual,
         ':restricciones_alimenticias'=>$data->_restricciones_alimenticias,
         ':restricciones_alimenticias_cual'=>$data->_restricciones_alimenticias_cual,
         ':email'=>$data->_email
@@ -288,15 +292,6 @@ sql;
       return $mysqli->update($query);
     }
 
-    public static function updateTicketVirtualRA($id,$clave){
-      $mysqli = Database::getInstance(true);
-      $query=<<<sql
-      UPDATE registros_acceso SET ticket_virtual = '$clave' WHERE id_registro_acceso = '$id'
-sql;
-
-      return $mysqli->update($query);
-    }
-
     public static function getIdTicket($clave){
       $mysqli = Database::getInstance();
       $query=<<<sql
@@ -316,7 +311,9 @@ sql;
     public static function getClaveByEmail($email){
       $mysqli = Database::getInstance();
       $query=<<<sql
-      SELECT ra.*, ra.ticket_virtual AS clave_ticket, CONCAT(ra.ticket_virtual,'.png') AS qr FROM registros_acceso ra
+      SELECT ra.*, tv.clave AS clave_ticket FROM registros_acceso ra
+      INNER JOIN ticket_virtual tv
+      ON tv.id_ticket_virtual = ra.id_ticket_virtual
       WHERE email = '$email';
 sql;
       return $mysqli->queryAll($query);

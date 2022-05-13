@@ -29,8 +29,8 @@ class PickUp extends Controller
     public function index()
     {
         $extraFooter = <<<html
-          <script>
-          $(document).ready(function(){
+        <script>
+            $(document).ready(function(){
             $('#pickup-list').DataTable({
                 "drawCallback": function( settings ) {
                   $('.current').addClass("btn bg-gradient-danger btn-rounded").removeClass("paginate_button");

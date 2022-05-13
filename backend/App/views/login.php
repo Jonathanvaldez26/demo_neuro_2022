@@ -4,43 +4,14 @@
     <body class="">
     <main class="main-content main-content-bg mt-0">
         <section>
-        <style>
-            .bg-gradient-musa {
-                background-image: linear-gradient(0deg, turquoise, pink 75%);
-            }
-
-            .bg-gradient-pink-white {
-                background-image: linear-gradient(0deg, pink, #f7e1ebcc 75%);
-            }
-
-            .bg-gradient-red {
-                background-image: linear-gradient(310deg, #ff0032 0%, #b10303 100%);
-            }
-
-            .morado-musa-text{
-                color: rgb(98 56 246);
-            }
-
-            .bg-musa-morado{
-                background-color: rgb(98 56 246);
-            }
-
-            .bg-pink{
-                background-color: pink;
-            }
-
-            .bg-turquoise{
-                background-color: turquoise;
-            }
-        </style>
             <div class="page-header min-vh-75">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
                             <div class="card card-plain mt-8">
                                 <div class="card-header pb-0 text-start">
-                                    <h3 class="font-weight-bolder morado-musa-text">GRUPO LAHE</h3>
-                                    <h5 class="font-weight-bolder morado-musa-text">Administrador MUSA 2022</h5>
+                                    <h3 class="font-weight-bolder text-danger text-gradient">GRUPO LAHE</h3>
+                                    <h5 class="font-weight-bolder text-danger text-gradient">Administrador CONAVE 2022</h5>
                                     <p class="mb-0">Introduce tus credenciales para iniciar sesión.</p>
                                 </div>
                                 <div class="card-body">
@@ -61,7 +32,7 @@
                                             </div> -->
                                         </div>
                                         <div class="text-center">
-                                            <button type="button" id="btnEntrar" class="btn bg-gradient-musa morado-musa-text w-100 mt-4 mb-0">ENTRAR</button>
+                                            <button type="button" id="btnEntrar" class="btn bg-gradient-danger w-100 mt-4 mb-0">ENTRAR</button>
                                         </div>
                                     </form>
                                 </div>
@@ -105,6 +76,6 @@
         </div>
     </footer>
 
-</body>
+    </body>
 
 <?php echo $footer; ?>

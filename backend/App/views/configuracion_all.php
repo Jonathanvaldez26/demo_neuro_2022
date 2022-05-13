@@ -1,9 +1,186 @@
 <?php echo $header; ?>
-<title>
-    Configuración - MUSA - GRUPO LAHE
-</title>
+
 <body class="g-sidenav-show  bg-gray-100">
-    <?php echo $asideMenu;?>
+    <aside class="bg-white-aside sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+        <div class="sidenav-header" style="margin-bottom: 30px;">
+            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+
+            <a class="navbar-brand m-0" href="/Principal/" target="_blank">
+                <img src="/assets/img/favicon.png" class="navbar-brand-img h-100" alt="main_logo">
+                <span class="ms-1 font-weight-bold">ADMIN CONVENCIÓN</span>
+                <p style="margin-top: 15px;"><span class="fa fa-user" style="color: #344767"></span> <?php echo $_SESSION['nombre'];?></p>
+            </a>
+
+
+        </div>
+        <hr class="horizontal dark mt-0">
+
+
+        <div class="collapse navbar-collapse  w-auto h-auto h-100" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="/Principal/" class="nav-link active" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-home" style="color: white"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Principal</span>
+                    </a>
+                </li>
+
+                <li class="nav-item" <?= $permisoGlobalHidden; ?>>
+                    <a data-bs-toggle="collapse" onclick="catalogos()" href="#catalogos" class="nav-link " aria-controls="catalogos" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-sitemap" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Catálogos</span>
+                    </a>
+                    <div class="collapse " id="catalogos" hidden>
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Bu/">
+                                    <span class="sidenav-mini-icon"> E </span>
+                                    <span class="sidenav-normal">Bu Asofarma</span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Lineas/">
+                                    <span class="sidenav-mini-icon"></span>
+                                    <span class="sidenav-normal">Lineas Asofarma</span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Posiciones/">
+                                    <span class="sidenav-mini-icon"> P </span>
+                                    <span class="sidenav-normal"> Posiciones Asofarma </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Restaurantes/">
+                                    <span class="sidenav-mini-icon"> E </span>
+                                    <span class="sidenav-normal"> Restaurates </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <hr class="horizontal dark" />
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item" <?= $asistentesHidden; ?>>
+                    <a href="/Asistentes/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-users" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Asistentes</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $vuelosHidden; ?>>
+                    <a href="/Vuelos/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-plane" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Vuelos</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $pickUpHidden; ?>>
+                    <a href="/PickUp/" class="nav-link " aria-controls="ecommerceExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-bus" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">PickUp</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $habitacionesHidden; ?>>
+                    <a href="/Habitaciones/" class="nav-link " aria-controls="authExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-hotel" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Habitaciones</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $cenasHidden; ?>>
+                    <a href="/Cenas/" class="nav-link " aria-controls="authExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-coffee" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Cenas</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $aistenciasHidden; ?>>
+                    <a href="/Asistencias/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-bell" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Asistencias</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $vacunacionHidden; ?>>
+                    <hr class="horizontal dark" />
+                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">SALUD</h6>
+                </li>
+                <li class="nav-item" <?= $vacunacionHidden; ?>>
+                    <a href="/ComprobantesVacunacion/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-shield-virus" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Comprobante Vacunación</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $pruebasHidden; ?>>
+                    <a href="/PruebasCovidUsuarios/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-virus-slash" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Pruebas Covid Usuarios</span>
+                    </a>
+                </li>
+
+                <li class="nav-item" <?= $configuracionHidden; ?>>
+                    <hr class="horizontal dark" />
+                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OTROS</h6>
+                </li>
+                <li class="nav-item" <?= $configuracionHidden; ?>>
+                    <a href="/Configuracion/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-tools" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Configuración</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $utileriasHidden; ?>>
+                    <a data-bs-toggle="collapse" onclick="utilerias()" href="#utilerias" class="nav-link " aria-controls="utilerias" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-user-circle-o" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Utilerias</span>
+                    </a>
+                    <div class="collapse " id="utilerias" hidden>
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Administradores/">
+                                    <span class="sidenav-mini-icon"> E </span>
+                                    <span class="sidenav-normal">Administradores</span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Perfiles/">
+                                    <span class="sidenav-mini-icon"> P </span>
+                                    <span class="sidenav-normal"> Perfiles </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="/Log/">
+                                    <span class="sidenav-mini-icon"> L </span>
+                                    <span class="sidenav-normal"> Log </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 px-0 mx-4 shadow-none border-radius-xl z-index-sticky" id="navbarBlur" data-scroll="true">
@@ -116,7 +293,7 @@
                                     <div class="d-flex py-1">
                                         <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
                                             <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <title>cmusait-card</title>
+                                                <title>credit-card</title>
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
                                                         <g transform="translate(1716.000000, 291.000000)">
@@ -412,7 +589,7 @@
                                         <div class="card up-card">
                                             <div class="row m-4 text-center">
                                                 <div class="col-12 m-auto mb-3">
-                                                    <div class="bg-gradient-musa avatar avatar-xxl position-relative">
+                                                    <div class="bg-gradient-red avatar avatar-xxl position-relative">
                                                         <span class="fas fa-file-pdf m-3" style="font-size: xxx-large;"></span>
                                                     </div>
                                                 </div>
@@ -444,7 +621,7 @@
                                         <div class="card up-card">
                                             <div class="row m-4 text-center">
                                                 <div class="col-12 m-auto mb-3">
-                                                    <div class="bg-gradient-musa avatar avatar-xxl position-relative">
+                                                    <div class="bg-gradient-red avatar avatar-xxl position-relative">
                                                         <span class="fas fa-bell m-3" style="font-size: xxx-large;"></span>
                                                     </div>
                                                 </div>
@@ -544,10 +721,4 @@
     </main>
 </body>
 
-<script>
-    $(document).ready(function (){
-        $('#configuracion a').addClass('active');
-        $('#configuracion .fa-tools').addClass('text-white');
-    });
-</script>
 <?php echo $footer; ?>

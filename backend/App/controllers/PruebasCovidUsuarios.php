@@ -18,8 +18,8 @@ class PruebasCovidUsuarios extends Controller{
         $this->_contenedor = new Contenedor;
         View::set('header',$this->_contenedor->header());
         View::set('footer',$this->_contenedor->footer());
-        // if(Controller::getPermisosUsuario($this->__usuario, "seccion_pruebas_covid",1) == 0)
-        // header('Location: /Principal/');
+        if(Controller::getPermisosUsuario($this->__usuario, "seccion_pruebas_covid",1) == 0)
+        header('Location: /Principal/');
     }
 
     public function getUsuario(){
@@ -45,16 +45,15 @@ html;
 
     $permisos = Controller::getPermisoGlobalUsuario($this->__usuario)[0];
       
-      // if($permisos['permisos_globales'] == 1 || $permisos['permisos_globales'] == 5){
+      if($permisos['permisos_globales'] == 1 || $permisos['permisos_globales'] == 5){
         $pruebas = PruebasCovidUsuariosDao::getAll();
-      // }else{
-      //   $id_linea = LineaDao::getLineaByAdmin($_SESSION['utilerias_administradores_id'])[0];
-      //   $pruebas = PruebasCovidUsuariosDao::getComprobatesByLinea($id_linea['id_linea_ejecutivo']);
-      // }
+      }else{
+        $id_linea = LineaDao::getLineaByAdmin($_SESSION['utilerias_administradores_id'])[0];
+        $pruebas = PruebasCovidUsuariosDao::getComprobatesByLinea($id_linea['id_linea_ejecutivo']);
+      }
       // $pruebas = PruebasCovidUsuariosDao::getAll();
       //$id_linea = LineaDao::getLineaByAdmin($_SESSION['utilerias_administradores_id'])[0];
       //var_dump( $id_linea);
-
 
       foreach ($pruebas as $key => $value) {
 
@@ -66,14 +65,14 @@ html;
               <td class="text-center">
                 <span class="badge badge-danger"><i class="fas fa-times"></i> Rechazado</span> <br>
                 <span class="badge badge-secondary">Folio <i class="fas fa-hashtag"> </i> {$value['id_c_v'] }</span>
-                <!--<hr>
-                  <p class="text-sm font-weight-bold mb-0 "><span class="fa fas fa-user-tie" style="font-size: 13px;"></span><b> Ejecutivo Asignado a Línea: </b><br><span class="fas fa-suitcase"> </span> {$value['nombre_ejecutivo']} <span class="badge badge-success" style="background-color:  {$value['color']}; color:white "><strong>{$value['nombre_linea_ejecutivo']}</strong></span></p>-->
+                <hr>
+                  <p class="text-sm font-weight-bold mb-0 "><span class="fa fas fa-user-tie" style="font-size: 13px;"></span><b> Ejecutivo Asignado a Línea: </b><br><span class="fas fa-suitcase"> </span> {$value['nombre_ejecutivo']} <span class="badge badge-success" style="background-color:  {$value['color']}; color:white "><strong>{$value['nombre_linea_ejecutivo']}</strong></span></p>
               </td>
               <td>
                 <h6 class="mb-0 text-sm"> <span class="fas fa-user-md"> </span>  {$value['nombre_completo']}</h6>
-               <!-- <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-business-time" style="font-size: 13px;"></span><b> Bu: </b>{$value['nombre_bu']}</p> -->
+                <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-business-time" style="font-size: 13px;"></span><b> Bu: </b>{$value['nombre_bu']}</p>
                   <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-pills" style="font-size: 13px;"></span><b> Linea Principal: </b>{$value['nombre_linea']}</p>
-                  <!--<p class="text-sm font-weight-bold mb-0 "><span class="fa fa-hospital" style="font-size: 13px;"></span><b> Posición: </b>{$value['nombre_posicion']}</p>-->
+                  <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-hospital" style="font-size: 13px;"></span><b> Posición: </b>{$value['nombre_posicion']}</p>
 
                 <hr>
 
@@ -94,11 +93,8 @@ html;
 
               </td>
               <td class="text-center">
-                <button type="button" class="btn bg-gradient-primary btn_iframe btn-icon-only" data-document="{$value['documento']}" data-toggle="modal" data-target="#ver-documento-{$value['id_c_v']}">
+                <button type="button" class="btn bg-gradient-primary btn_iframe" data-document="{$value['documento']}" data-toggle="modal" data-target="#ver-documento-{$value['id_c_v']}">
                   <i class="fas fa-eye"></i>
-                </button>
-                <button class="btn bg-gradient-warning btn-icon-only" id="btn-status-{$value['id_c_v']}" onclick="pendientePrueba({$value['id_c_v']})" type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Poner pendiente prueba de {$value['nombre_completo']}">
-                  <span class="fas fa-clock"></span>
                 </button>
               </td>
             </tr>
@@ -129,22 +125,22 @@ html;
                               <span> <b>Nombre:</b> {$value['nombre_completo']}</span>
                               <span class="badge badge-danger">Rechazado</span>
                             </div>
-                            <!--<div class="mb-2">
+                            <div class="mb-2">
                               <h6 class="fas fa-address-card"> </h6>
                               <span> <b>Número de empleado:</b> {$value['numero_empleado']}</span>
                             </div>
                             <div class="mb-2">
                               <h6 class="fas fa-business-time"> </h6>
                               <span> <b>Bu:</b> {$value['nombre_bu']}</span>
-                            </div>-->
+                            </div>
                             <div class="mb-2">
                               <h6 class="fas fa-pills"> </h6>
                               <span> <b>Línea:</b> {$value['nombre_linea']}</span>
                             </div>
-                            <!--<div class="mb-2">
+                            <div class="mb-2">
                               <h6 class="fas fa-hospital"> </h6>
                               <span> <b>Posición:</b> {$value['nombre_posicion']}</span>
-                            </div>-->
+                            </div>
                             <div class="mb-2">
                               <h6 class="fa fa-mail-bulk"> </h6>
                               <span> <b>Correo Electrónico:</b> <u><a href="mailto:{$value['email']}">{$value['email']}</a></u></span>
@@ -238,14 +234,14 @@ html;
                 <td class="text-center">
                   <span class="badge badge-success"><i class="fas fa-check"></i> Aprobada</span> <br>
                   <span class="badge badge-secondary">Folio <i class="fas fa-hashtag"> </i> {$value['id_c_v'] }</span>
-                  <!--<hr>
-                  <p class="text-sm font-weight-bold mb-0 "><span class="fa fas fa-user-tie" style="font-size: 13px;"></span><b> Ejecutivo Asignado a Línea: </b><br><span class="fas fa-suitcase"> </span> {$value['nombre_ejecutivo']} <span class="badge badge-success" style="background-color:  {$value['color']}; color:white "><strong>{$value['nombre_linea_ejecutivo']}</strong></span></p>-->
+                  <hr>
+                  <p class="text-sm font-weight-bold mb-0 "><span class="fa fas fa-user-tie" style="font-size: 13px;"></span><b> Ejecutivo Asignado a Línea: </b><br><span class="fas fa-suitcase"> </span> {$value['nombre_ejecutivo']} <span class="badge badge-success" style="background-color:  {$value['color']}; color:white "><strong>{$value['nombre_linea_ejecutivo']}</strong></span></p>
                 </td>
                 <td>
                   <h6 class="mb-0 text-sm"> <span class="fas fa-user-md"> </span>  {$value['nombre_completo']}</h6>
-                  <!--<p class="text-sm font-weight-bold mb-0 "><span class="fa fa-business-time" style="font-size: 13px;"></span><b> Bu: </b>{$value['nombre_bu']}</p> -->
+                  <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-business-time" style="font-size: 13px;"></span><b> Bu: </b>{$value['nombre_bu']}</p>
                     <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-pills" style="font-size: 13px;"></span><b> Linea Principal: </b>{$value['nombre_linea']}</p>
-                    <!--<p class="text-sm font-weight-bold mb-0 "><span class="fa fa-hospital" style="font-size: 13px;"></span><b> Posición: </b>{$value['nombre_posicion']}</p>-->
+                    <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-hospital" style="font-size: 13px;"></span><b> Posición: </b>{$value['nombre_posicion']}</p>
 
                   <hr>
 
@@ -266,11 +262,8 @@ html;
 
                 </td>
                 <td class="text-center">
-                  <button type="button" class="btn bg-gradient-primary btn_iframe btn-icon-only" data-document="{$value['documento']}" data-toggle="modal" data-target="#ver-documento-{$value['id_c_v']}">
+                  <button type="button" class="btn bg-gradient-primary btn_iframe" data-document="{$value['documento']}" data-toggle="modal" data-target="#ver-documento-{$value['id_c_v']}">
                     <i class="fas fa-eye"></i>
-                  </button>
-                  <button class="btn bg-gradient-warning btn-icon-only" id="btn-status-{$value['id_c_v']}" onclick="pendientePrueba({$value['id_c_v']})" type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Poner pendiente prueba de {$value['nombre_completo']}">
-                    <span class="fas fa-clock"></span>
                   </button>
                 </td>
               </tr>
@@ -300,22 +293,22 @@ html;
                                   <span> <b>Nombre:</b> {$value['nombre_completo']}</span>
                                   <span class="badge badge-success">Aprobado</span>
                                 </div>
-                                <!--<div class="mb-2">
+                                <div class="mb-2">
                                   <h6 class="fas fa-address-card"> </h6>
                                   <span> <b>Número de empleado:</b> {$value['numero_empleado']}</span>
                                 </div>
                                 <div class="mb-2">
                                   <h6 class="fas fa-business-time"> </h6>
                                   <span> <b>Bu:</b> {$value['nombre_bu']}</span>
-                                </div> -->
+                                </div>
                                 <div class="mb-2">
                                   <h6 class="fas fa-pills"> </h6>
                                   <span> <b>Línea:</b> {$value['nombre_linea']}</span>
                                 </div>
-                                <!--<div class="mb-2">
+                                <div class="mb-2">
                                   <h6 class="fas fa-hospital"> </h6>
                                   <span> <b>Posición:</b> {$value['nombre_posicion']}</span>
-                                </div>-->
+                                </div>
                                 <div class="mb-2">
                                   <h6 class="fa fa-mail-bulk"> </h6>
                                   <span> <b>Correo Electrónico:</b> <u><a href="mailto:{$value['email']}">{$value['email']}</a></u></span>
@@ -409,14 +402,14 @@ html;
                 <td class="text-center">
                   <span class="badge badge-warning text-dark"><i class="fas fa-clock"></i> Pendiente</span> <br>
                   <span class="badge badge-secondary">Folio <i class="fas fa-hashtag"> </i> {$value['id_c_v'] }</span>
-                 <!-- <hr>
-                  <p class="text-sm font-weight-bold mb-0 "><span class="fa fas fa-user-tie" style="font-size: 13px;"></span><b> Ejecutivo Asignado a Línea: </b><br><span class="fas fa-suitcase"> </span> {$value['nombre_ejecutivo']} <span class="badge badge-success" style="background-color:  {$value['color']}; color:white "><strong>{$value['nombre_linea_ejecutivo']}</strong></span></p>-->
+                  <hr>
+                  <p class="text-sm font-weight-bold mb-0 "><span class="fa fas fa-user-tie" style="font-size: 13px;"></span><b> Ejecutivo Asignado a Línea: </b><br><span class="fas fa-suitcase"> </span> {$value['nombre_ejecutivo']} <span class="badge badge-success" style="background-color:  {$value['color']}; color:white "><strong>{$value['nombre_linea_ejecutivo']}</strong></span></p>
                 </td>
                 <td>
                   <h6 class="mb-0 text-sm"> <span class="fas fa-user-md"> </span>  {$value['nombre_completo']}</h6>
-                  <!--<p class="text-sm font-weight-bold mb-0 "><span class="fa fa-business-time" style="font-size: 13px;"></span><b> Bu: </b>{$value['nombre_bu']}</p>-->
+                  <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-business-time" style="font-size: 13px;"></span><b> Bu: </b>{$value['nombre_bu']}</p>
                     <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-pills" style="font-size: 13px;"></span><b> Linea Principal: </b>{$value['nombre_linea']}</p>
-                   <!-- <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-hospital" style="font-size: 13px;"></span><b> Posición: </b>{$value['nombre_posicion']}</p> -->
+                    <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-hospital" style="font-size: 13px;"></span><b> Posición: </b>{$value['nombre_posicion']}</p>
 
                   <hr>
 
@@ -437,11 +430,8 @@ html;
 
                 </td>
                 <td class="text-center">
-                  <button type="button" class="btn bg-gradient-primary btn_iframe btn-icon-only" data-document="{$value['documento']}" data-toggle="modal" data-target="#ver-documento-{$value['id_c_v']}">
+                  <button type="button" class="btn bg-gradient-primary btn_iframe" data-document="{$value['documento']}" data-toggle="modal" data-target="#ver-documento-{$value['id_c_v']}">
                     <i class="fas fa-eye"></i>
-                  </button>
-                  <button type="button" class="btn bg-gradient-danger btn-icon-only" onclick="borrarPrueba({$value['id_c_v']})">
-                    <i class="fa fa-solid fa-trash"></i>
                   </button>
                 </td>
               </tr>
@@ -471,22 +461,22 @@ html;
                                   <span> <b>Nombre:</b> {$value['nombre_completo']}</span>
                                   <span class="badge badge-warning">Pendiente</span>
                                 </div>
-                                <!--<div class="mb-2">
+                                <div class="mb-2">
                                   <h6 class="fas fa-address-card"> </h6>
                                   <span> <b>Número de empleado:</b> {$value['numero_empleado']}</span>
                                 </div>
                                 <div class="mb-2">
                                   <h6 class="fas fa-business-time"> </h6>
                                   <span> <b>Bu:</b> {$value['nombre_bu']}</span>
-                                </div>-->
+                                </div>
                                 <div class="mb-2">
                                   <h6 class="fas fa-pills"> </h6>
                                   <span> <b>Línea:</b> {$value['nombre_linea']}</span>
                                 </div>
-                                <!--<div class="mb-2">
+                                <div class="mb-2">
                                   <h6 class="fas fa-hospital"> </h6>
                                   <span> <b>Posición:</b> {$value['nombre_posicion']}</span>
-                                </div> -->
+                                </div>
                                 <div class="mb-2">
                                   <h6 class="fa fa-mail-bulk"> </h6>
                                   <span> <b>Correo Electrónico:</b> <u><a href="mailto:{$value['email']}">{$value['email']}</a></u></span>
@@ -851,151 +841,151 @@ html;
           var modal_id = $(this).attr('data-target');
         
           if($(modal_id+" iframe").length == 0){
-              $(modal_id+" .iframe").append('<iframe src="https://registro.foromusa.com/pruebas_covid/'+documento+'" style="width:100%; height:700px;" frameborder="0" ></iframe>');
+              $(modal_id+" .iframe").append('<iframe src="https://www.convencionasofarma2022.mx/pruebas_covid/'+documento+'" style="width:100%; height:700px;" frameborder="0" ></iframe>');
           }          
         });
 
         $('#table_pendiente').DataTable({
-          "drawCallback": function(settings) {
-              $('.current').addClass("btn bg-gradient-musa morado-musa-text btn-rounded").removeClass("paginate_button");
-              $('.paginate_button').addClass("btn").removeClass("paginate_button");
-              $('.dataTables_length').addClass("m-4");
-              $('.dataTables_info').addClass("mx-4");
-              $('.dataTables_filter').addClass("m-4");
-              $('input').addClass("form-control");
-              $('select').addClass("form-control");
-              $('.previous.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2");
-              $('.next.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2");
-              $('.previous').addClass("btn-outline-info btn-rounded mx-2");
-              $('.next').addClass("btn-outline-info btn-rounded mx-2");
-              $('a.btn').addClass("btn-rounded");
+          "drawCallback": function( settings ) {
+          $('.current').addClass("btn bg-gradient-danger btn-rounded").removeClass("paginate_button");
+          $('.paginate_button').addClass("btn").removeClass("paginate_button");
+          $('.dataTables_length').addClass("m-4");
+          $('.dataTables_info').addClass("mx-4");
+          $('.dataTables_filter').addClass("m-4");
+          $('input').addClass("form-control");
+          $('select').addClass("form-control");
+          $('.previous.disabled').addClass("btn-outline-danger opacity-5 btn-rounded mx-2");
+          $('.next.disabled').addClass("btn-outline-danger opacity-5 btn-rounded mx-2");
+          $('.previous').addClass("btn-outline-danger btn-rounded mx-2");
+          $('.next').addClass("btn-outline-danger btn-rounded mx-2");
+          $('a.btn').addClass("btn-rounded");
           },
           "language": {
-
-              "sProcessing": "Procesando...",
-              "sLengthMenu": "Mostrar _MENU_ registros",
-              "sZeroRecords": "No se encontraron resultados",
-              "sEmptyTable": "Ningún dato disponible en esta tabla",
-              "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-              "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-              "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-              "sInfoPostFix": "",
-              "sSearch": "Buscar:",
-              "sUrl": "",
-              "sInfoThousands": ",",
+          
+              "sProcessing":     "Procesando...",
+              "sLengthMenu":     "Mostrar _MENU_ registros",
+              "sZeroRecords":    "No se encontraron resultados",
+              "sEmptyTable":     "Ningún dato disponible en esta tabla",
+              "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+              "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+              "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+              "sInfoPostFix":    "",
+              "sSearch":         "Buscar:",
+              "sUrl":            "",
+              "sInfoThousands":  ",",
               "sLoadingRecords": "Cargando...",
               "oPaginate": {
-                  "sFirst": "Primero",
-                  "sLast": "Último",
-                  "sNext": "Siguiente",
+                  "sFirst":    "Primero",
+                  "sLast":     "Último",
+                  "sNext":     "Siguiente",
                   "sPrevious": "Anterior"
               },
               "oAria": {
-                  "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                  "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
                   "sSortDescending": ": Activar para ordenar la columna de manera descendente"
               }
-
+          
           }
         });
 
         $('#table_rechazado').DataTable({
-          "drawCallback": function(settings) {
-              $('.current').addClass("btn bg-gradient-musa morado-musa-text btn-rounded").removeClass("paginate_button");
-              $('.paginate_button').addClass("btn").removeClass("paginate_button");
-              $('.dataTables_length').addClass("m-4");
-              $('.dataTables_info').addClass("mx-4");
-              $('.dataTables_filter').addClass("m-4");
-              $('input').addClass("form-control");
-              $('select').addClass("form-control");
-              $('.previous.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2");
-              $('.next.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2");
-              $('.previous').addClass("btn-outline-info btn-rounded mx-2");
-              $('.next').addClass("btn-outline-info btn-rounded mx-2");
-              $('a.btn').addClass("btn-rounded");
+          "drawCallback": function( settings ) {
+          $('.current').addClass("btn bg-gradient-danger btn-rounded").removeClass("paginate_button");
+          $('.paginate_button').addClass("btn").removeClass("paginate_button");
+          $('.dataTables_length').addClass("m-4");
+          $('.dataTables_info').addClass("mx-4");
+          $('.dataTables_filter').addClass("m-4");
+          $('input').addClass("form-control");
+          $('select').addClass("form-control");
+          $('.previous.disabled').addClass("btn-outline-danger opacity-5 btn-rounded mx-2");
+          $('.next.disabled').addClass("btn-outline-danger opacity-5 btn-rounded mx-2");
+          $('.previous').addClass("btn-outline-danger btn-rounded mx-2");
+          $('.next').addClass("btn-outline-danger btn-rounded mx-2");
+          $('a.btn').addClass("btn-rounded");
           },
           "language": {
-
-              "sProcessing": "Procesando...",
-              "sLengthMenu": "Mostrar _MENU_ registros",
-              "sZeroRecords": "No se encontraron resultados",
-              "sEmptyTable": "Ningún dato disponible en esta tabla",
-              "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-              "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-              "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-              "sInfoPostFix": "",
-              "sSearch": "Buscar:",
-              "sUrl": "",
-              "sInfoThousands": ",",
+          
+              "sProcessing":     "Procesando...",
+              "sLengthMenu":     "Mostrar _MENU_ registros",
+              "sZeroRecords":    "No se encontraron resultados",
+              "sEmptyTable":     "Ningún dato disponible en esta tabla",
+              "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+              "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+              "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+              "sInfoPostFix":    "",
+              "sSearch":         "Buscar:",
+              "sUrl":            "",
+              "sInfoThousands":  ",",
               "sLoadingRecords": "Cargando...",
               "oPaginate": {
-                  "sFirst": "Primero",
-                  "sLast": "Último",
-                  "sNext": "Siguiente",
+                  "sFirst":    "Primero",
+                  "sLast":     "Último",
+                  "sNext":     "Siguiente",
                   "sPrevious": "Anterior"
               },
               "oAria": {
-                  "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                  "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
                   "sSortDescending": ": Activar para ordenar la columna de manera descendente"
               }
-
+          
           }
         });
 
         $('#table_aprobado').DataTable({
-          "drawCallback": function(settings) {
-              $('.current').addClass("btn bg-gradient-musa morado-musa-text btn-rounded").removeClass("paginate_button");
-              $('.paginate_button').addClass("btn").removeClass("paginate_button");
-              $('.dataTables_length').addClass("m-4");
-              $('.dataTables_info').addClass("mx-4");
-              $('.dataTables_filter').addClass("m-4");
-              $('input').addClass("form-control");
-              $('select').addClass("form-control");
-              $('.previous.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2");
-              $('.next.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2");
-              $('.previous').addClass("btn-outline-info btn-rounded mx-2");
-              $('.next').addClass("btn-outline-info btn-rounded mx-2");
-              $('a.btn').addClass("btn-rounded");
+          "drawCallback": function( settings ) {
+          $('.current').addClass("btn bg-gradient-danger btn-rounded").removeClass("paginate_button");
+          $('.paginate_button').addClass("btn").removeClass("paginate_button");
+          $('.dataTables_length').addClass("m-4");
+          $('.dataTables_info').addClass("mx-4");
+          $('.dataTables_filter').addClass("m-4");
+          $('input').addClass("form-control");
+          $('select').addClass("form-control");
+          $('.previous.disabled').addClass("btn-outline-danger opacity-5 btn-rounded mx-2");
+          $('.next.disabled').addClass("btn-outline-danger opacity-5 btn-rounded mx-2");
+          $('.previous').addClass("btn-outline-danger btn-rounded mx-2");
+          $('.next').addClass("btn-outline-danger btn-rounded mx-2");
+          $('a.btn').addClass("btn-rounded");
           },
           "language": {
-
-              "sProcessing": "Procesando...",
-              "sLengthMenu": "Mostrar _MENU_ registros",
-              "sZeroRecords": "No se encontraron resultados",
-              "sEmptyTable": "Ningún dato disponible en esta tabla",
-              "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-              "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-              "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-              "sInfoPostFix": "",
-              "sSearch": "Buscar:",
-              "sUrl": "",
-              "sInfoThousands": ",",
+          
+              "sProcessing":     "Procesando...",
+              "sLengthMenu":     "Mostrar _MENU_ registros",
+              "sZeroRecords":    "No se encontraron resultados",
+              "sEmptyTable":     "Ningún dato disponible en esta tabla",
+              "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+              "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+              "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+              "sInfoPostFix":    "",
+              "sSearch":         "Buscar:",
+              "sUrl":            "",
+              "sInfoThousands":  ",",
               "sLoadingRecords": "Cargando...",
               "oPaginate": {
-                  "sFirst": "Primero",
-                  "sLast": "Último",
-                  "sNext": "Siguiente",
+                  "sFirst":    "Primero",
+                  "sLast":     "Último",
+                  "sNext":     "Siguiente",
                   "sPrevious": "Anterior"
               },
               "oAria": {
-                  "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                  "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
                   "sSortDescending": ": Activar para ordenar la columna de manera descendente"
               }
-
+          
           }
         });
       });
     </script>
 html;
 
-     // $id_linea = LineaDao::getLineaByAdmin($_SESSION['utilerias_administradores_id'])[0];
+      $id_linea = LineaDao::getLineaByAdmin($_SESSION['utilerias_administradores_id'])[0];
 
       //-----------------------------//
-      // if($permisos['permisos_globales'] == 1 || $permisos['permisos_globales'] == 5){
+      if($permisos['permisos_globales'] == 1 || $permisos['permisos_globales'] == 5){
         $pruebas_validos = PruebasCovidUsuariosDao::contarPruebasValidos();
-      // }
-      // else{
-      //   $pruebas_validos = PruebasCovidUsuariosDao::contarPruebasValidosByLine($id_linea['id_linea_ejecutivo']);
-      // }
+      }
+      else{
+        $pruebas_validos = PruebasCovidUsuariosDao::contarPruebasValidosByLine($id_linea['id_linea_ejecutivo']);
+      }
       foreach ($pruebas_validos[0] as $key => $value) {
         $numero_validos = $value;
       }
@@ -1003,11 +993,11 @@ html;
 
 
       //-----------------------------//
-      // if($permisos['permisos_globales'] == 1 || $permisos['permisos_globales'] == 5){
+      if($permisos['permisos_globales'] == 1 || $permisos['permisos_globales'] == 5){
         $asistentes_total = PruebasCovidUsuariosDao::contarAsistentes();
-      // }else{
-        // $asistentes_total = PruebasCovidUsuariosDao::contarAsistentesByLine($id_linea['id_linea_ejecutivo']);
-      // }
+      }else{
+        $asistentes_total = PruebasCovidUsuariosDao::contarAsistentesByLine($id_linea['id_linea_ejecutivo']);
+      }
 
       foreach ($asistentes_total[0] as $key => $value) {
         $numero_asistentes = $value;
@@ -1016,11 +1006,11 @@ html;
 
 
       //-----------------------------//
-      // if($permisos['permisos_globales'] == 1 || $permisos['permisos_globales'] == 5){
+      if($permisos['permisos_globales'] == 1 || $permisos['permisos_globales'] == 5){
         $pruebas_total = PruebasCovidUsuariosDao::contarPruebasTotales();
-      // }else{
-      //   $pruebas_total = PruebasCovidUsuariosDao::contarPruebasTotalesByLine($id_linea['id_linea_ejecutivo']);
-      // }
+      }else{
+        $pruebas_total = PruebasCovidUsuariosDao::contarPruebasTotalesByLine($id_linea['id_linea_ejecutivo']);
+      }
 
       foreach ($pruebas_total[0] as $key => $value) {
         $numero_pruebas = $value;
@@ -1029,11 +1019,11 @@ html;
 
 
       //-----------------------------//
-      // if($permisos['permisos_globales'] == 1 || $permisos['permisos_globales'] == 5){
+      if($permisos['permisos_globales'] == 1 || $permisos['permisos_globales'] == 5){
         $pruebas_sin_revisar = PruebasCovidUsuariosDao::contarPruebasPorRevisar();
-      // }else{
-      //   $pruebas_sin_revisar = PruebasCovidUsuariosDao::contarPruebasPorRevisarByLine($id_linea['id_linea_ejecutivo']);
-      // }
+      }else{
+        $pruebas_sin_revisar = PruebasCovidUsuariosDao::contarPruebasPorRevisarByLine($id_linea['id_linea_ejecutivo']);
+      }
       foreach ($pruebas_sin_revisar[0] as $key => $value) {
         $numero_sin_revisar = $value;
       }
@@ -1072,26 +1062,9 @@ html;
       View::set('tabla',$tabla);
       View::set('tabla_no_v',$tabla_no_v);
       View::set('tabla_rechazados',$tabla_rechazados);
-      View::set('asideMenu',$this->_contenedor->asideMenu());
       View::set('header',$this->_contenedor->header($extraHeader));
       View::set('footer',$this->_contenedor->footer($extraFooter));
       View::render("pruebascovidusuarios_all");
-    }
-
-    public function changeStatus(){
-
-        $id = $_POST['dato'];
-        $update_prueba = PruebasCovidUsuariosDao::updateStatus($id);
-
-        echo json_encode($update_prueba);
-    }
-
-    public function borrarPrueba(){
-
-        $id = $_POST['dato'];
-        $delete_prueba = PruebasCovidUsuariosDao::delete($id);
-
-        echo json_encode($delete_prueba);
     }
 
     public function Validar(){
@@ -1142,7 +1115,7 @@ html;
         $nota = $prueba['nota'];
 
         $id = PruebasCovidUsuariosDao::rechazar($documento);
-        // PruebasCovidUsuariosDao::insertLog($ua_id,$fecha_carga_doc,$fecha_prueba_covid,$tipo_prueba,$documento_prueba,$nota);
+        PruebasCovidUsuariosDao::insertLog($ua_id,$fecha_carga_doc,$fecha_prueba_covid,$tipo_prueba,$documento_prueba,$nota);
 
         if($id){
             echo "success";
